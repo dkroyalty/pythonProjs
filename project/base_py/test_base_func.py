@@ -32,6 +32,7 @@ def test_checkSearchedPatternsInFile():
     checkSearchedPatternsInFile(testFile, searchList)
 
 def test_getSearchedFilesInDirWithAbsPath():
+    getSearchedFilesInDirWithAbsPath(testDir, [])
     getSearchedFilesInDirWithAbsPath(testDir, filePtnList)
 
 def test_copyListedFileToDir():

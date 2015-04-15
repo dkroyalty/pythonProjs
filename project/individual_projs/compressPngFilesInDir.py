@@ -15,6 +15,8 @@ sys.setdefaultencoding('utf-8')
 _toolPath = os.path.join(os.getcwd(), "../../tools/pngquant/pngquant")
 _showDetail = False
 
+#Comment:compress png file with pngquant
+#Param:1
 class checker(threading.Thread):
     def __init__(self, interval=1):
         threading.Thread.__init__(self)

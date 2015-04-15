@@ -60,7 +60,7 @@ def getSearchedFilesInDirWithAbsPath(sourceDir, searchPtnList, beLoop=True):
     for eachFile in os.listdir(sourceDir):
         absPath =  os.path.join(sourceDir, eachFile)
         if os.path.isfile(absPath):
-            if len(searchPtnList) == 0:
+            if len(searchPtnList) > 0:
                 for eachPtn in searchPtnList:
                     if re.search(eachPtn, eachFile):
                         fileList.append(absPath)

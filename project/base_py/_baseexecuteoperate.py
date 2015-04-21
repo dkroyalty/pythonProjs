@@ -132,3 +132,11 @@ def runExecuteCommand(executeDir, runCommand):
     runResult = runner.stdout.read()
     os.chdir(prevDir)
     return runResult
+
+@checkinoutinfo
+def printContentToFile(outputDir, outputFileName, outputContent):
+    checklegaldir(outputDir)
+    outputFile = os.path.join(outputDir, outputFileName)
+    with open(outputFile, 'wb') as fileHandler:
+        print >> fileHandler, outputContent
+    return "output to %s end" % (outputFile)

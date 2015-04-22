@@ -7,7 +7,6 @@ import socket
 import urllib
 import urllib2
 import cookielib
-from pyquery import PyQuery
 
 sys.path.append("..")
 from base_py._baseexecuteoperate import *

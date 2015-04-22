@@ -15,6 +15,8 @@ from base_py._baseexecuteoperate import *
 reload(sys)
 sys.setdefaultencoding('utf-8')
 
+urllib2.socket.setdefaulttimeout(10)
+
 def GetTotalProxyList():
     filepath = os.path.join(os.getcwd(), "proxy.txt")
     originlist = getFileContentInList(filepath)
@@ -57,9 +59,10 @@ def LoadUrlContent(urlSite, proxyip):
     # soemthing strange happened when call urlopen
     # some exception raised in "data = self._sock.recv(self._rbufsize)"
     # the last output is "socket.timeout: timed out"
+    # sometimes output "socket.error: [Errno 54] Connection reset by peer"
     # however the exception not caught in try...except...
     try:  
-        urlhtml = urllib2.urlopen(request, timeout = 5).read()
+        urlhtml = urllib2.urlopen(request).read()
     except urllib2.URLError, e:  
         if isinstance(e.reason, socket.timeout):
             print "Error: Time Out"

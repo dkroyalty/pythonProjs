@@ -105,7 +105,5 @@ if __name__ == "__main__":
     param = ""
     if len(sys.argv) > 1:
         param = sys.argv[1]
-    if len(param) == 0:
-        print "not legal input parameter"
-    elif os.path.isdir(param):
-        CompressPngFilesInDir(param)
+    assert os.path.isdir(param):
+    CompressPngFilesInDir(param)

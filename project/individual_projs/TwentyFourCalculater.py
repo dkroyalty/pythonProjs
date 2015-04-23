@@ -155,10 +155,8 @@ def TakeOperateInEquation(iterNum, iterOpe):
     return equationList
 
 if __name__ == "__main__":
-    param = ""
+    param = None
     if len(sys.argv) > 1:
         param = sys.argv[1]
-    if len(param) == 0:
-        print "not legal input parameter"
-    else:
-        DoTwentyFourCalculate(param)
+    assert param is not None
+    DoTwentyFourCalculate(param)

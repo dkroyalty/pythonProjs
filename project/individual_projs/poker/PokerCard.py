@@ -7,14 +7,16 @@ sys.setdefaultencoding('utf-8')
 
 class PokerCardPool():
 
-    def __init__(self, isspecial=False):
+    def __init__(self, duplicatetimes=1, isspecial=False):
+        assert duplicatetimes > 0
         self.cardpool = []
-        if isspecial == False:
-            self.cardpool.append(1000000)
-            self.cardpool.append(1000001)
-        for color in range(2, 6):
-            for pt in range(len(PokerCard._CardPointList)):
-                self.cardpool.append(10**color+pt)
+        for i in range(duplicatetimes):
+            if isspecial == False:
+                self.cardpool.append(1000000)
+                self.cardpool.append(1000001)
+            for color in range(2, 6):
+                for pt in range(len(PokerCard._CardPointList)):
+                    self.cardpool.append(10**color+pt)
 
     def dealCardsFromPool(self, times=1):
         deallist = []
@@ -90,4 +92,3 @@ if __name__ == "__main__":
     testpool = PokerCardPool()
     #print testpool.dealCardsFromPool(5)
     testpool.displayPoolInfo()
-    #testsppool = PokerCardPool(True)

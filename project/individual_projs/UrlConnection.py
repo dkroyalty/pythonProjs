@@ -42,16 +42,17 @@ def GetRandomAgent():
         'Lynx/2.8.5rel.1 libwww-FM/2.14 SSL-MM/1.4.1 GNUTLS/1.2.9'
     ]
     useragent = random.choice(useragentlist)
-    print useragent
+    #print useragent
     return useragent
 
-def LoadUrlContent(urlSite, proxyip):
+def LoadUrlContent(urlSite, proxyip=None):
     useragent = GetRandomAgent()
-    openerparamlist = [urllib2.HTTPHandler]
-    openerparamlist.append(urllib2.ProxyHandler(proxyip))
-    openerparamlist.append(GetGeneratedCookie())
-    opener = urllib2.build_opener(*openerparamlist)
-    urllib2.install_opener(opener)
+    if proxyip is None:
+        openerparamlist = [urllib2.HTTPHandler]
+        openerparamlist.append(urllib2.ProxyHandler(proxyip))
+        openerparamlist.append(GetGeneratedCookie())
+        opener = urllib2.build_opener(*openerparamlist)
+        urllib2.install_opener(opener)
     request = urllib2.Request(urlSite)
     request.add_header('User-Agent',useragent)
     urlhtml = None

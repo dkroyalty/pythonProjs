@@ -28,6 +28,9 @@ class PokerCardPool():
             i += 1
         return deallist
 
+    def getPoolSize(self):
+        return len(self.cardpool)
+
     def displayPoolInfo(self):
         for eachcard in self.cardpool:
             print PokerCard(eachcard).getCardInfo()
@@ -55,23 +58,29 @@ class PokerCard():
         return False
 
     def checkValueLegal(self, cardvalue):
-        cardtype = self.getCardType(cardvalue)
+        cardtype = self.getGivenCardType(cardvalue)
         assert cardtype is not None
-        val = self.getCardValue(cardvalue)
+        val = self.getGivenCardValue(cardvalue)
         if self.checkIsJoker(cardvalue):
             return True
         elif val not in range(len(self._CardPointList)):
             return False
         return True
 
-    def getCardValue(self, value):
+    def getCardType(self):
+        return self.getGivenCardType(self.cardvalue)
+
+    def getCardValue(self):
+        return self.getGivenCardValue(self.cardvalue)
+
+    def getGivenCardValue(self, value):
         for eachkey in self._CardBiasDict.keys():
             delta = value - self._CardBiasDict[eachkey]
             if delta >= 0 and delta < 20:
                 return value % self._CardBiasDict[eachkey]
         return None
 
-    def getCardType(self, value):
+    def getGivenCardType(self, value):
         for eachkey in self._CardBiasDict.keys():
             delta = value - self._CardBiasDict[eachkey]
             if delta >= 0 and delta < 20:
@@ -80,12 +89,12 @@ class PokerCard():
 
     def getCardInfo(self):
         infostr = ""
-        fullname = self.getCardType(self.cardvalue)
+        fullname = self.getGivenCardType(self.cardvalue)
         if self.checkIsJoker(self.cardvalue):
-            infostr = "%s-%d" % (fullname, self.getCardValue(self.cardvalue))
+            infostr = "%s-%d" % (fullname, self.getGivenCardValue(self.cardvalue))
         else:
             infostr = "%s-%s" % (fullname,
-                self._CardPointList[self.getCardValue(self.cardvalue)])
+                self._CardPointList[self.getGivenCardValue(self.cardvalue)])
         return infostr
 
 if __name__ == "__main__":

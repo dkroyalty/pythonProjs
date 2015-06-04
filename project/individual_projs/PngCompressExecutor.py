@@ -98,12 +98,12 @@ def ExcuteQuantPic(picFullPath, bitSize=256):
 
 def CompressPngFilesInDir(dirPath):
     pictureList = getSearchedFilesInDirWithAbsPath(dirPath, [r'\.png$'])
-    if len(pictureList):
+    if len(pictureList) > 0:
         ConvertPicture(pictureList)
 
 if __name__ == "__main__":
     param = ""
     if len(sys.argv) > 1:
         param = sys.argv[1]
-    assert os.path.isdir(param):
+    assert os.path.isdir(param)
     CompressPngFilesInDir(param)

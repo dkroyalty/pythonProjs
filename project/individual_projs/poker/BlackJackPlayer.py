@@ -13,11 +13,11 @@ class BlackJackPlayer(PokerPlayer):
     Bust = 3
 
     def __init__(self, number, fund, isbanker):
-        PokerPlayer.__init__(self, number, fund)
+        super(BlackJackPlayer, self).__init__(number, fund)
         self.isbanker = isbanker
 
     def getStatusInfo(self):
-        infostr = PokerPlayer.getStatusInfo(self)
+        infostr = super(BlackJackPlayer, self).getStatusInfo()
         infostr += "\n\tcurrent value: %d" % (self.calculateTotalValue())
         return infostr
 
@@ -53,7 +53,7 @@ class BlackJackPlayer(PokerPlayer):
         return self.Bust
 
     def playGame(self):
-        PokerPlayer.playGame(self)
+        super(BlackJackPlayer, self).playGame()
         if self.status == self.Ready:
             self.currbet = 100
             self.status = self.Hit

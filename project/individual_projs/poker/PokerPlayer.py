@@ -5,7 +5,7 @@ from PokerCard import PokerCard
 reload(sys)
 sys.setdefaultencoding('utf-8')
 
-class PokerPlayer():
+class PokerPlayer(object):
 
     def __init__(self, number, fund):
         self.playernumber = number

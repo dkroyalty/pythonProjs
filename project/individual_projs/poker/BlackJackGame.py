@@ -11,12 +11,12 @@ class BlackJackGame(PokerGame):
     def __init__(self, playersize=4, cardsetnum=4):
         assert playersize > 1
         self.bankerid = 0
-        PokerGame.__init__(self, cardsetnum, True)
+        super(BlackJackGame, self).__init__(cardsetnum, True)
         for i in range(playersize):
             self.playerlist.append(BlackJackPlayer(i, 10000, i==self.bankerid))
 
     def dealInGamePlayerCard(self):
-        PokerGame.dealInGamePlayerCard(self)
+        super(BlackJackGame, self).dealInGamePlayerCard()
         for eachplayer in self.playerlist:
             if eachplayer.status == BlackJackPlayer.Hit:
                 if len(eachplayer.cardlist) > 0:
@@ -33,7 +33,7 @@ class BlackJackGame(PokerGame):
         return oneLoopEnd
 
     def balanceResult(self):
-        PokerGame.balanceResult(self)
+        super(BlackJackGame, self).balanceResult()
         if self.checkOneLoopEnd() == True:
             for eachplayer in self.playerlist:
                 if not eachplayer.playernumber == self.bankerid:
@@ -87,7 +87,7 @@ class BlackJackGame(PokerGame):
         return -1
 
     def reportGameStatus(self):
-        print PokerGame.getStatusInfo(self)
+        print super(BlackJackGame, self).getStatusInfo()
         for eachplayer in self.playerlist:
             if hasattr(eachplayer, 'getStatusInfo'):
                 print eachplayer.getStatusInfo()

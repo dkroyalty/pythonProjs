@@ -5,7 +5,7 @@ from PokerCard import PokerCardPool
 reload(sys)
 sys.setdefaultencoding('utf-8')
 
-class PokerGame():
+class PokerGame(object):
 
     def __init__(self, cardsetnum, removejoker):
         self.playerlist = []

@@ -5,7 +5,7 @@ import random
 reload(sys)
 sys.setdefaultencoding('utf-8')
 
-class PokerCardPool():
+class PokerCardPool(object):
 
     def __init__(self, duplicatetimes=1, isspecial=False):
         assert duplicatetimes > 0
@@ -35,7 +35,7 @@ class PokerCardPool():
         for eachcard in self.cardpool:
             print PokerCard(eachcard).getCardInfo()
 
-class PokerCard():
+class PokerCard(object):
 
     _CardBiasDict = {
         "Diamond":100,

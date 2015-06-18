@@ -1,0 +1,16 @@
+Django==1.8.2
+hiredis==0.1.1
+MySQL-python==1.2.3
+PIL==1.1.7
+pycrypto==2.6.1
+PyGithub==1.24.1
+pylint==0.28.0
+pymongo==2.5.2
+pyOpenSSL==0.13.1
+python-daemon==1.6
+PyYAML==3.10
+redis==2.9.1
+simplejson==3.4.0
+South==0.7.5
+xlrd==0.9.2
+xxtea==0.0.1

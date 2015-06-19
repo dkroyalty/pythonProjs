@@ -1,0 +1,21 @@
+<!DOCTYPE HTML PUBLIC "‐//W3C//DTD HTML 4.01//EN">
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        {% block basic %}
+            {% load staticfiles %}
+            <link type="text/css" rel="stylesheet" href= "{% static "css/default.css" %}" />
+        {% endblock %}
+        {% block setting %}
+        {% endblock %}
+        {% block title %}
+            <title>Local Website</title>
+        {% endblock %}
+    </head>
+    <body>
+        {% block content %}
+        {% endblock %}
+        {% block footer %}
+        {% endblock %}
+    </body>
+</html>

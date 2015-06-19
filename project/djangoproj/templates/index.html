@@ -1,0 +1,18 @@
+{% extends "common_base.html" %}
+
+{% block setting %}
+    {% load staticfiles %}
+    <link type="text/css" rel="stylesheet" href= "{% static "css/index.css" %}" />
+{% endblock %}
+
+{% block content %}
+    {% include 'common_head.html' %}
+<div class="TextCenter">
+    {% if time %}
+        <div class="individual">
+            <span class="Gold">It is now {{ time }}.</span>
+        </div>
+    {% endif %}
+</div>
+
+{% endblock %}

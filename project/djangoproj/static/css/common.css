@@ -1,0 +1,122 @@
+
+body {
+    position: relative;
+    font-family: Palatino, "Palatino Linotype", "Book Antiqua", "Hoefler Text", Georgia, "Lucida Bright", Cambria, Times, "Times New Roman", serif;
+    font-size: 18px;
+    font-size: 1.8rem;
+    background: #1D1E19;
+    color: #CCCCCC;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+}
+
+div {
+    display: block;
+}
+
+.container:before {
+    content: "";
+    display: table;
+}
+
+.container:after {
+    content: "";
+    display: table;
+    clear: both;
+}
+
+.icon {
+  display: inline-block;
+  font: normal normal normal 14px/1 FontAwesome;
+  font-size: inherit;
+  text-rendering: auto;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.icon-navicon:before, .icon-reorder:before, .icon-bars:before {
+  content: "\f0c9";
+}
+
+[role="banner"] {
+    background: #0C4B33;
+    overflow: hidden;
+    margin: 0;
+    padding: 10px 0 6px;
+    position: relative;
+    z-index: 0;
+}
+
+
+[role="banner"]:before {
+    content: "";
+    display: table;
+}
+
+[role="banner"]:after {
+    content: "";
+    display: table;
+    clear: both;
+}
+
+[role="banner"] .title {
+    font-size: 2.2rem;
+    color: #000000;
+}
+
+[role="banner"] .menu-button {
+  font-size: 20px;
+  font-size: 2rem;
+  background: #0C4B33;
+  border-radius: 23px;
+  color: #fff;
+  cursor: pointer;
+  display: block;
+  float: right;
+  height: 45px;
+  line-height: 48px;
+  margin: 4px 10px;
+  text-align: center;
+  text-decoration: none;
+  width: 45px;
+}
+
+[role="banner"] .menu-button.active {
+  opacity: 0.5;
+}
+
+[role="banner"] .nav-menu-on {
+  display: none;
+  overflow: hidden;
+  -webkit-transition: all 0.3s ease-out;
+  transition: all 0.3s ease-out;
+}
+
+[role="banner"] .nav-menu-on.active {
+  display: block;
+}
+
+[role="navigation"] {
+  background: #0C4B33;
+  width: 100%;
+}
+
+[role="banner"] [role="navigation"] li {
+  font-family: "Roboto", Corbel, Avenir, "Lucida Grande", "Lucida Sans", sans-serif;
+  font-size: 13px;
+  font-size: 1.3rem;
+  display: block;
+  font-weight: 700;
+  line-height: 16px;
+  text-align: left;
+  text-transform: uppercase;
+  margin: 0 10px;
+  border-top: 1px solid #106142;
+}
+
+[role="banner"] [role="navigation"] a {
+  color: #fff;
+  display: block;
+  padding: 20px 0px;
+  text-decoration: none;
+}

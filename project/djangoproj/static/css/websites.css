@@ -1,0 +1,61 @@
+
+table {
+    margin-left: 2%;
+    width: 96%;
+    color: #FFFFFF;
+    border-collapse: collapse;
+}
+
+tr {
+    position: relative;
+    text-align: center;
+    vertical-align: middle;
+}
+
+th {
+    border: 1px solid #959595;
+    font-weight: bold;
+    background-color: #CBCBCB;
+    color: #000000;
+}
+
+td {
+    border: 1px solid #959595;
+    background-color: #EBEBEB;
+    border-spacing: 1px;
+    color: #000000;
+}
+
+table .name {
+    width: 25%;
+}
+
+table .desc {
+    width: 50%;
+}
+
+table .link {
+    width: 25%;
+}
+
+div .detail {
+    display: none;
+    position: fixed;
+    color: #3CFFFF;
+    background-color: #171717;
+    border: 0;
+    margin: 0 auto;
+}
+
+div .detail.desc {
+    display: block;
+    position: fixed;
+    color: #3CFFFF;
+    background-color: #171717;
+    border: 0;
+    margin: 0 auto;
+}
+
+div :after {
+    clear: both;
+}

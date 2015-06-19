@@ -1,0 +1,47 @@
+{% extends "common_base.html" %}
+
+{% block setting %}
+    {% load staticfiles %}
+    <link type="text/css" rel="stylesheet" href= "{% static "css/websites.css" %}" />
+    <script src= "{% static "js/websites.js" %}" ></script>
+{% endblock %}
+
+{% block content %}
+    {% include 'common_head.html' %}
+<hr/>
+<div class="TextCenter">
+    {% if weblist %}
+        <table>
+            <tr>
+                <th class="name">Name</th>
+                <th class="desc">Desc</th>
+                <th class="link">Entrance</th>
+            </tr>
+        {% for webinfo in weblist %}
+            <tr>
+                <td class="name"
+                    onmouseover="switchDisp('name_{{ webinfo.webseq }}', 'inline')"
+                    onmouseout= "switchDisp('name_{{ webinfo.webseq }}', 'none')"
+                    onclick=    "switchDisp('name_{{ webinfo.webseq }}', 'none')">
+                    {{ webinfo.desc }}
+                    <div id="name_{{ webinfo.webseq }}" class="detail">
+                        {{ webinfo.website }}
+                    </div>
+                </td>
+                <td class="desc"
+                    onmouseover="switchDispContent('desc_{{ webinfo.webseq }}', '{{ webinfo.detail }}')"
+                    onmouseout= "switchDispContent('desc_{{ webinfo.webseq }}', '')"
+                    onclick= "switchDispContent('desc_{{ webinfo.webseq }}', '')">
+                    Detail
+                    <div id="desc_{{ webinfo.webseq }}" class="detail desc"></div>
+                </td>
+                <td class="link">
+                    <a href="{{ webinfo.website }}">enter</a>
+                </td>
+            </tr>
+        {% endfor %}
+        </table>
+    {% endif %}
+</div>
+
+{% endblock %}

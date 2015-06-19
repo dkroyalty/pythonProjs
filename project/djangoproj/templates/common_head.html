@@ -1,0 +1,25 @@
+{% load staticfiles %}
+<link type="text/css" rel="stylesheet" href= "{% static "css/common.css" %}" />
+<script src= "{% static "js/common.js" %}" ></script>
+
+<div role="banner" id="top">
+    <div class="container">
+        {% block intro %}
+        <span class="intro">PrivateSite</span>
+        {% endblock %}
+        <div class="menu-button" id="menubutton" onclick="switchDisplayMenu()">
+            <i class="icon icon-reorder"></i>
+        </div>
+        <div role="navigation" id="menucontent" class="nav-menu-on">
+        <ul>
+            <li>
+                <a href="{% url 'index' %}">Index</a>
+            </li>
+            <li>
+                <a href="{% url 'websites' %}">Websites</a>
+            </li>
+        </ul>
+        </div>
+    </div>
+</div>
+

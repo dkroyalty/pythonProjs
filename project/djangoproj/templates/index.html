@@ -7,12 +7,11 @@
 
 {% block content %}
     {% include 'common_head.html' %}
-<div class="TextCenter">
-    {% if time %}
-        <div class="individual">
-            <span class="Gold">It is now {{ time }}.</span>
+    <body onload="timeCount('timetick')">
+        <div class="TextCenter">
+            <div class="individual">
+                <span id="timetick" class="Gold"/>
+            </div>
         </div>
-    {% endif %}
-</div>
-
+    </body>
 {% endblock %}

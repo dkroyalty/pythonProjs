@@ -22,10 +22,11 @@ import views
 urlpatterns = [
     url(r'^admin/', include(admin.site.urls)),
     url(r'^$', views.index, name='index'),
+    url(r'^error/$', views.error, name='error'),
     url(r'^index/$', views.index, name='index'),
-    url(r'^websites/$', views.websites, name='websites'),
-    url(r'^favicon\.ico$', 'django.views.generic.simple.redirect_to',
+    url(r'^favicon\.ico/$', 'django.views.generic.simple.redirect_to',
         {'url': '/static/img/favicon.ico'}),
+    url(r'^websites/', include('localsite.websites.urls')),
 ]
 
 urlpatterns += staticfiles_urlpatterns()

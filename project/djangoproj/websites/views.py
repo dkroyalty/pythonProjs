@@ -16,3 +16,15 @@ def saveNewWebsite(seq, website, desc, detail):
         )
     newsite.save()
     return newsite
+
+def deleteWebsiteBySeq(seq):
+    record = Websites.objects.get(webseq=seq)
+    try:
+        record.delete()
+    except:
+        return False
+    return True
+
+def clearWebsites():
+    record = Websites.objects.all.delete()
+    return (len(getOrderedWebList()) == 0)

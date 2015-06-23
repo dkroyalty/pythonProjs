@@ -9,13 +9,15 @@
 {% block content %}
     {% include 'common_head.html' %}
 <hr/>
-<div class="TextCenter">
-    {% if weblist %}
+
+{% if weblist %}
+    <div class="TextCenter">
         <table>
             <tr>
                 <th class="name">Name</th>
                 <th class="desc">Desc</th>
                 <th class="link">Entrance</th>
+                <th class="operate">Operate</th>
             </tr>
         {% for webinfo in weblist %}
             <tr>
@@ -38,10 +40,18 @@
                 <td class="link">
                     <a href="{{ webinfo.website }}">enter</a>
                 </td>
+                <td class="operate">
+                    <a href="{% url 'webedit' 'delete' webinfo.webseq %}">delete</a>
+                </td>
             </tr>
         {% endfor %}
         </table>
-    {% endif %}
-</div>
+        <form name="clear" action="{% url 'webedit' 'clear' 'all' %}" method="get">
+            <input class="clear" type="submit" value="Clear All" />
+        </form>
+    </div>
+{% else %}
+    <body onload="redirectError()"/>
+{% endif %}
 
 {% endblock %}

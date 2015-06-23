@@ -1,0 +1,15 @@
+{% extends "common_base.html" %}
+
+{% block content %}
+    {% include 'common_head.html' %}
+
+{% if staytime %}
+    {% if redirect %}
+    <body onload="startCounting('error', {{ staytime }}, '{{ redirect }}', 1)">
+        <div id="error" class="system">
+        </div>
+    </body>
+    {% endif %}
+{% endif %}
+
+{% endblock %}

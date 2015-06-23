@@ -1,0 +1,72 @@
+[
+    {
+        "fields": {
+            "desc": "reference",
+            "detail": "django project site for downloading and reference",
+            "webseq": 1,
+            "website": "https://www.djangoproject.com/"
+        },
+        "model": "websites.Websites",
+        "pk": 1
+    },
+    {
+        "fields": {
+            "desc": "tranlate",
+            "detail": "translate languages through google engine",
+            "webseq": 2,
+            "website": "http://translate.google.cn/"
+        },
+        "model": "websites.Websites",
+        "pk": 2
+    },
+    {
+        "fields": {
+            "desc": "unity3d",
+            "detail": "domestic unity3d develop site",
+            "webseq": 3,
+            "website": "http://www.unitymanual.com/"
+        },
+        "model": "websites.Websites",
+        "pk": 3
+    },
+    {
+        "fields": {
+            "desc": "baidu",
+            "detail": "domestic web search site",
+            "webseq": 4,
+            "website": "https://www.baidu.com/"
+        },
+        "model": "websites.Websites",
+        "pk": 4
+    },
+    {
+        "fields": {
+            "desc": "googlejp",
+            "detail": "google search site for japan",
+            "webseq": 5,
+            "website": "https://www.google.co.jp/"
+        },
+        "model": "websites.Websites",
+        "pk": 5
+    },
+    {
+        "fields": {
+            "desc": "cloudresource",
+            "detail": "domestic cloud rerouce bbs site linked to BaiduNetDisk",
+            "webseq": 6,
+            "website": "http://www.baiduyun.me/"
+        },
+        "model": "websites.Websites",
+        "pk": 6
+    },
+    {
+        "fields": {
+            "desc": "netdisk",
+            "detail": "domestic cloud storage supported by Baidu",
+            "webseq": 7,
+            "website": "http://pan.baidu.com/disk/home/"
+        },
+        "model": "websites.Websites",
+        "pk": 7
+    }
+]

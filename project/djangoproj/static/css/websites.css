@@ -31,10 +31,14 @@ table .name {
 }
 
 table .desc {
-    width: 50%;
+    width: 25%;
 }
 
 table .link {
+    width: 25%;
+}
+
+table .operate {
     width: 25%;
 }
 
@@ -54,6 +58,13 @@ div .detail.desc {
     background-color: #171717;
     border: 0;
     margin: 0 auto;
+}
+
+input .clear {
+    background-size: 2rem;
+    background-color: #FFFFFF;
+    color: #5E3F1F;
+    font-weight: bold;
 }
 
 div :after {

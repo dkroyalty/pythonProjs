@@ -1,28 +1,28 @@
 
 body {
-    position: relative;
-    font-family: Palatino, "Palatino Linotype", "Book Antiqua", "Hoefler Text", Georgia, "Lucida Bright", Cambria, Times, "Times New Roman", serif;
-    font-size: 18px;
-    font-size: 1.8rem;
-    background: #1D1E19;
-    color: #CCCCCC;
-    line-height: 1.6;
-    -webkit-font-smoothing: antialiased;
+  position: relative;
+  font-family: Palatino, "Palatino Linotype", "Book Antiqua", "Hoefler Text", Georgia, "Lucida Bright", Cambria, Times, "Times New Roman", serif;
+  font-size: 18px;
+  font-size: 1.8rem;
+  background: #1D1E19;
+  color: #CCCCCC;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
 }
 
 div {
-    display: block;
+  display: block;
 }
 
 .container:before {
-    content: "";
-    display: table;
+  content: "";
+  display: table;
 }
 
 .container:after {
-    content: "";
-    display: table;
-    clear: both;
+  content: "";
+  display: table;
+  clear: both;
 }
 
 .icon {
@@ -38,30 +38,36 @@ div {
   content: "\f0c9";
 }
 
+.system {
+  text-align: center;
+  font-size: 1rem;
+  color: #FFFFFF;
+}
+
 [role="banner"] {
-    background: #0C4B33;
-    overflow: hidden;
-    margin: 0;
-    padding: 10px 0 6px;
-    position: relative;
-    z-index: 0;
+  background: #0C4B33;
+  overflow: hidden;
+  margin: 0;
+  padding: 10px 0 6px;
+  position: relative;
+  z-index: 0;
 }
 
 
 [role="banner"]:before {
-    content: "";
-    display: table;
+  content: "";
+  display: table;
 }
 
 [role="banner"]:after {
-    content: "";
-    display: table;
-    clear: both;
+  content: "";
+  display: table;
+  clear: both;
 }
 
 [role="banner"] .title {
-    font-size: 2.2rem;
-    color: #000000;
+  font-size: 2.2rem;
+  color: #000000;
 }
 
 [role="banner"] .menu-button {

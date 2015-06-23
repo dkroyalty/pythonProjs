@@ -1,0 +1,23 @@
+table:
+  out-type: json
+  sheet: websites
+  row: 1
+  model: websites.Websites
+
+  columns:
+    - name: webseq
+      column: 优先级
+      type: int
+
+    - name: website
+      column: 网址
+      type: char
+
+    - name: desc
+      column: 描述
+      type: char
+
+    - name: detail
+      column: 简介
+      type: char
+

@@ -1,0 +1,571 @@
+.AliceBlue {
+    color: #F0F8FF;
+}
+
+.AntiqueWhite {
+    color: #FAEBD7;
+}
+
+.Aqua {
+    color: #00FFFF;
+}
+
+.Aquamarine {
+    color: #7FFFD4;
+}
+
+.Azure {
+    color: #F0FFFF;
+}
+
+.Beige {
+    color: #F5F5DC;
+}
+
+.Bisque {
+    color: #FFE4C4;
+}
+
+.Black {
+    color: #000000;
+}
+
+.BlanchedAlmond {
+    color: #FFEBCD;
+}
+
+.Blue {
+    color: #0000FF;
+}
+
+.BlueViolet {
+    color: #8A2BE2;
+}
+
+.Brown {
+    color: #A52A2A;
+}
+
+.BurlyWood {
+    color: #DEB887;
+}
+
+.CadetBlue {
+    color: #5F9EA0;
+}
+
+.Chartreuse {
+    color: #7FFF00;
+}
+
+.Chocolate {
+    color: #D2691E;
+}
+
+.Coral {
+    color: #FF7F50;
+}
+
+.CornflowerBlue {
+    color: #6495ED;
+}
+
+.Cornsilk {
+    color: #FFF8DC;
+}
+
+.Crimson {
+    color: #DC143C;
+}
+
+.Cyan {
+    color: #00FFFF;
+}
+
+.DarkBlue {
+    color: #00008B;
+}
+
+.DarkCyan {
+    color: #008B8B;
+}
+
+.DarkGoldenRod {
+    color: #B8860B;
+}
+
+.DarkGray {
+    color: #A9A9A9;
+}
+
+.DarkGreen {
+    color: #006400;
+}
+
+.DarkKhaki {
+    color: #BDB76B;
+}
+
+.DarkMagenta {
+    color: #8B008B;
+}
+
+.DarkOliveGreen {
+    color: #556B2F;
+}
+
+.Darkorange {
+    color: #FF8C00;
+}
+
+.DarkOrchid {
+    color: #9932CC;
+}
+
+.DarkRed {
+    color: #8B0000;
+}
+
+.DarkSalmon {
+    color: #E9967A;
+}
+
+.DarkSeaGreen {
+    color: #8FBC8F;
+}
+
+.DarkSlateBlue {
+    color: #483D8B;
+}
+
+.DarkSlateGray {
+    color: #2F4F4F;
+}
+
+.DarkTurquoise {
+    color: #00CED1;
+}
+
+.DarkViolet {
+    color: #9400D3;
+}
+
+.DeepPink {
+    color: #FF1493;
+}
+
+.DeepSkyBlue {
+    color: #00BFFF;
+}
+
+.DimGray {
+    color: #696969;
+}
+
+.DodgerBlue {
+    color: #1E90FF;
+}
+
+.Feldspar {
+    color: #D19275;
+}
+
+.FireBrick {
+    color: #B22222;
+}
+
+.FloralWhite {
+    color: #FFFAF0;
+}
+
+.ForestGreen {
+    color: #228B22;
+}
+
+.Fuchsia {
+    color: #FF00FF;
+}
+
+.Gainsboro {
+    color: #DCDCDC;
+}
+
+.GhostWhite {
+    color: #F8F8FF;
+}
+
+.Gold {
+    color: #FFD700;
+}
+
+.GoldenRod {
+    color: #DAA520;
+}
+
+.Gray {
+    color: #808080;
+}
+
+.Green {
+    color: #008000;
+}
+
+.GreenYellow {
+    color: #ADFF2F;
+}
+
+.HoneyDew {
+    color: #F0FFF0;
+}
+
+.HotPink {
+    color: #FF69B4;
+}
+
+.IndianRed {
+    color: #CD5C5C;
+}
+
+.Indigo {
+    color: #4B0082;
+}
+
+.Ivory {
+    color: #FFFFF0;
+}
+
+.Khaki {
+    color: #F0E68C;
+}
+
+.Lavender {
+    color: #E6E6FA;
+}
+
+.LavenderBlush {
+    color: #FFF0F5;
+}
+
+.LawnGreen {
+    color: #7CFC00;
+}
+
+.LemonChiffon {
+    color: #FFFACD;
+}
+
+.LightBlue {
+    color: #ADD8E6;
+}
+
+.LightCoral {
+    color: #F08080;
+}
+
+.LightCyan {
+    color: #E0FFFF;
+}
+
+.LightGoldenRodYellow {
+    color: #FAFAD2;
+}
+
+.LightGrey {
+    color: #D3D3D3;
+}
+
+.LightGreen {
+    color: #90EE90;
+}
+
+.LightPink {
+    color: #FFB6C1;
+}
+
+.LightSalmon {
+    color: #FFA07A;
+}
+
+.LightSeaGreen {
+    color: #20B2AA;
+}
+
+.LightSkyBlue {
+    color: #87CEFA;
+}
+
+.LightSlateBlue {
+    color: #8470FF;
+}
+
+.LightSlateGray {
+    color: #778899;
+}
+
+.LightSteelBlue {
+    color: #B0C4DE;
+}
+
+.LightYellow {
+    color: #FFFFE0;
+}
+
+.Lime {
+    color: #00FF00;
+}
+
+.LimeGreen {
+    color: #32CD32;
+}
+
+.Linen {
+    color: #FAF0E6;
+}
+
+.Magenta {
+    color: #FF00FF;
+}
+
+.Maroon {
+    color: #800000;
+}
+
+.MediumAquaMarine {
+    color: #66CDAA;
+}
+
+.MediumBlue {
+    color: #0000CD;
+}
+
+.MediumOrchid {
+    color: #BA55D3;
+}
+
+.MediumPurple {
+    color: #9370D8;
+}
+
+.MediumSeaGreen {
+    color: #3CB371;
+}
+
+.MediumSlateBlue {
+    color: #7B68EE;
+}
+
+.MediumSpringGreen {
+    color: #00FA9A;
+}
+
+.MediumTurquoise {
+    color: #48D1CC;
+}
+
+.MediumVioletRed {
+    color: #C71585;
+}
+
+.MidnightBlue {
+    color: #191970;
+}
+
+.MintCream {
+    color: #F5FFFA;
+}
+
+.MistyRose {
+    color: #FFE4E1;
+}
+
+.Moccasin {
+    color: #FFE4B5;
+}
+
+.NavajoWhite {
+    color: #FFDEAD;
+}
+
+.Navy {
+    color: #000080;
+}
+
+.OldLace {
+    color: #FDF5E6;
+}
+
+.Olive {
+    color: #808000;
+}
+
+.OliveDrab {
+    color: #6B8E23;
+}
+
+.Orange {
+    color: #FFA500;
+}
+
+.OrangeRed {
+    color: #FF4500;
+}
+
+.Orchid {
+    color: #DA70D6;
+}
+
+.PaleGoldenRod {
+    color: #EEE8AA;
+}
+
+.PaleGreen {
+    color: #98FB98;
+}
+
+.PaleTurquoise {
+    color: #AFEEEE;
+}
+
+.PaleVioletRed {
+    color: #D87093;
+}
+
+.PapayaWhip {
+    color: #FFEFD5;
+}
+
+.PeachPuff {
+    color: #FFDAB9;
+}
+
+.Peru {
+    color: #CD853F;
+}
+
+.Pink {
+    color: #FFC0CB;
+}
+
+.Plum {
+    color: #DDA0DD;
+}
+
+.PowderBlue {
+    color: #B0E0E6;
+}
+
+.Purple {
+    color: #800080;
+}
+
+.Red {
+    color: #FF0000;
+}
+
+.RosyBrown {
+    color: #BC8F8F;
+}
+
+.RoyalBlue {
+    color: #4169E1;
+}
+
+.SaddleBrown {
+    color: #8B4513;
+}
+
+.Salmon {
+    color: #FA8072;
+}
+
+.SandyBrown {
+    color: #F4A460;
+}
+
+.SeaGreen {
+    color: #2E8B57;
+}
+
+.SeaShell {
+    color: #FFF5EE;
+}
+
+.Sienna {
+    color: #A0522D;
+}
+
+.Silver {
+    color: #C0C0C0;
+}
+
+.SkyBlue {
+    color: #87CEEB;
+}
+
+.SlateBlue {
+    color: #6A5ACD;
+}
+
+.SlateGray {
+    color: #708090;
+}
+
+.Snow {
+    color: #FFFAFA;
+}
+
+.SpringGreen {
+    color: #00FF7F;
+}
+
+.SteelBlue {
+    color: #4682B4;
+}
+
+.Tan {
+    color: #D2B48C;
+}
+
+.Teal {
+    color: #008080;
+}
+
+.Thistle {
+    color: #D8BFD8;
+}
+
+.Tomato {
+    color: #FF6347;
+}
+
+.Turquoise {
+    color: #40E0D0;
+}
+
+.Violet {
+    color: #EE82EE;
+}
+
+.VioletRed {
+    color: #D02090;
+}
+
+.Wheat {
+    color: #F5DEB3;
+}
+
+.White {
+    color: #FFFFFF;
+}
+
+.WhiteSmoke {
+    color: #F5F5F5;
+}
+
+.Yellow {
+    color: #FFFF00;
+}
+
+.YellowGreen {
+    color: #9ACD32;
+}

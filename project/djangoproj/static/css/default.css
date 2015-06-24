@@ -29,18 +29,21 @@ hgroup, nav, section {
 }
 
 nav, ul, ol, li {
-    list-style: none; }
+    list-style: none;
+}
 
 blockquote, q {
-    quotes: none; }
+    quotes: none;
+}
 
 blockquote:before, blockquote:after,
 q:before, q:after {
     content: '';
-    content: none; }
+    content: none;
+}
 
-a:visited {
-    color: #156641;
+div :after {
+    clear: both;
 }
 
 a {
@@ -51,6 +54,14 @@ a {
     vertical-align: baseline;
     text-decoration: underline;
     background: transparent;
-    color: #0C3C26;
+    color: #00008B;
     -webkit-tap-highlight-color: transparent;
+}
+
+a:hover {
+    color: #FF1493;
+}
+
+a:visited {
+    color: #A9A9A9;
 }

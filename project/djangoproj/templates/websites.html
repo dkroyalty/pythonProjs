@@ -3,7 +3,7 @@
 {% block setting %}
     {% load staticfiles %}
     <link type="text/css" rel="stylesheet" href= "{% static "css/websites.css" %}" />
-    <script src= "{% static "js/websites.js" %}" ></script>
+    <script src= "{% static "js/display.js" %}" ></script>
 {% endblock %}
 
 {% block content %}
@@ -47,7 +47,7 @@
         {% endfor %}
         </table>
         <form name="clear" action="{% url 'webedit' 'clear' 'all' %}" method="get">
-            <input class="clear" type="submit" value="Clear All" />
+            <input type="submit" value="Clear All" />
         </form>
     </div>
 {% else %}

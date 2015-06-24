@@ -1,5 +1,10 @@
 {% extends "common_base.html" %}
 
+{% block setting %}
+    {% load staticfiles %}
+    <script src= "{% static "js/timefunc.js" %}" ></script>
+{% endblock %}
+
 {% block content %}
     {% include 'common_head.html' %}
 

@@ -8,100 +8,10 @@
     color: #800000;
 }
 
-.TextCenter {
+.Text.Center {
     text-align: center;
-    margin : 0 .2rem;
-    color: #800000;
-}
-
-.Black {
-    font-weight: bold;
-    color: black;
-}
-
-.Yellow {
-    font-weight: bold;
-    color: #FFF957;
-}
-
-.Green {
-    font-weight: bold;
-    color: #0F7319;
-}
-
-.Blue {
-    font-weight: bold;
-    color: #00FDFE;
-}
-
-.Dodgerblue {
-    font-weight: bold;
-    color: #1e90ff;
-}
-
-.Violet {
-    font-weight: bold;
-    color: #ee82ee;
-}
-
-.DodgerViolet {
-    font-weight: bold;
-    color: #FF0099;
-}
-
-.Gold {
-    font-weight: bold;
-    color: #ffd700;
-}
-
-.Red {
-    font-weight: bold;
-    color: #B40000;
-}
-
-.PureRed {
-    font-weight: bold;
-    color: #FF0000;
-}
-
-.Brown {
-    font-weight: bold;
-    color: #CD853F;
-}
-
-.DarkBrown {
-    font-weight: bold;
-    color: #5E3F1F;
-}
-
-.Bold {
-    font-weight: bold;
 }
 
 .Img {
     width: 100%;
-}
-
-table {
-    margin-left: 5%;
-    width: 90%;
-    color: #FFFFFF;
-    font-weight: bold;
-    border-spacing: 0;
-}
-
-tr {
-    position: relative;
-    height: 1.5rem;
-}
-
-th {
-    background-color: #555555;
-    vertical-align: middle;
-}
-
-td {
-    border: 1px solid #555555;
-    vertical-align: middle;
-    border-spacing: 0;
 }

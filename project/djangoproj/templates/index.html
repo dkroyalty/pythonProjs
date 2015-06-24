@@ -3,12 +3,13 @@
 {% block setting %}
     {% load staticfiles %}
     <link type="text/css" rel="stylesheet" href= "{% static "css/index.css" %}" />
+    <script src= "{% static "js/timefunc.js" %}" ></script>
 {% endblock %}
 
 {% block content %}
     {% include 'common_head.html' %}
     <body onload="timeCount('timetick')">
-        <div class="TextCenter">
+        <div class="Text Center">
             <div class="individual">
                 <span id="timetick" class="Gold"/>
             </div>

@@ -44,29 +44,14 @@ table .operate {
 
 div .detail {
     display: none;
-    position: fixed;
+    position: absolute;
     color: #3CFFFF;
     background-color: #171717;
     border: 0;
     margin: 0 auto;
+    overflow: hidden;
 }
 
 div .detail.desc {
     display: block;
-    position: fixed;
-    color: #3CFFFF;
-    background-color: #171717;
-    border: 0;
-    margin: 0 auto;
-}
-
-input .clear {
-    background-size: 2rem;
-    background-color: #FFFFFF;
-    color: #5E3F1F;
-    font-weight: bold;
-}
-
-div :after {
-    clear: both;
 }

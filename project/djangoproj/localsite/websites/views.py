@@ -8,6 +8,9 @@ logger = logging.getLogger('localsite')
 
 import datetime
 from websites.views import *
+from localsite.decorators import (
+    valid_params,
+)
 
 def websites(request):
     htmltemplate = get_template('websites.html')
@@ -17,6 +20,7 @@ def websites(request):
     html = htmltemplate.render(Context(paramdict))
     return HttpResponse(html)
 
+@valid_params
 def webedit(request, operation, param):
     logger.debug("operation: %s %s" % (operation, param))
     if operation == 'delete':

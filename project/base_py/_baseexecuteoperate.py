@@ -20,6 +20,7 @@ def getFileContentInList(sourceFile):
         contents = fileHandler.readlines()
     for eachLine in contents:
         lineCont = re.sub(r'\n$', '', eachLine)
+        lineCont = re.sub(r'\r$', '', lineCont)
         lineCont = lineCont.lstrip()
         if len(lineCont) > 0:
             contentList.append(lineCont)
@@ -38,9 +39,9 @@ def getSearchedLineListInFile(sourceFile, searchList=[]):
     return rstList
 
 @checkinoutinfo
-def outputContentToFile(outputDir, outputFileName, outputContent):
+def outputContentToFile(outputFile, outputContent):
+    outputDir = os.path.dirname(outputFile)
     checklegaldir(outputDir)
-    outputFile = os.path.join(outputDir, outputFileName)
     with open(outputFile, 'wb') as fileHandler:
         fileHandler.write(outputContent)
     return "output to %s end" % (outputFile)
@@ -54,21 +55,24 @@ def checkSearchedPatternsInFile(sourceFile, checkPtnList=[]):
     return False
 
 @checkinoutinfo
-def getSearchedFilesInDirWithAbsPath(sourceDir, searchPtnList, beLoop=True):
+def getSearchedFilesInDirWithAbsPath(sourceDir, patternList=None, beLoop=True):
     checklegaldir(sourceDir)
     fileList = []
     for eachFile in os.listdir(sourceDir):
         absPath =  os.path.join(sourceDir, eachFile)
         if os.path.isfile(absPath):
-            if len(searchPtnList) > 0:
-                for eachPtn in searchPtnList:
-                    if re.search(eachPtn, eachFile):
+            if patternList is not None and len(patternList) > 0:
+                for eachPtn in patternList:
+                    if eachPtn is None:
+                        fileList.append(absPath)
+                        break
+                    elif re.search(eachPtn, eachFile):
                         fileList.append(absPath)
                         break
             else:
                 fileList.append(absPath)
         elif os.path.isdir(absPath) and beLoop == True:
-            fileList.extend(getSearchedFilesInDirWithAbsPath(absPath, searchPtnList))
+            fileList.extend(getSearchedFilesInDirWithAbsPath(absPath, patternList))
     return fileList
 
 @checkinoutinfo

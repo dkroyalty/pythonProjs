@@ -101,6 +101,7 @@ def DistributeOperation(paramdict):
     detail = paramdict['detail']
     extra = paramdict['extra']
     if sourcedir is None or operation is None:
+        print >> sys.stderr, u'lack source or operation'
         return
     operationdict = {
         'conv' : "ConvertDirFileFormat(sourcedir, detail, [extra])",

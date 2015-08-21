@@ -144,3 +144,15 @@ def printContentToFile(outputDir, outputFileName, outputContent):
     with open(outputFile, 'wb') as fileHandler:
         print >> fileHandler, outputContent
     return "output to %s end" % (outputFile)
+
+@checkinoutinfo
+def tryConvertData(rawdata, desttype, defaultval):
+    try:
+        return desttype(rawdata)
+    except ValueError:
+        return defaultval
+    except TypeError:
+        print 'raw data type unexpected'
+        return defaultval
+    print 'fail to convert value'
+    return defaultval

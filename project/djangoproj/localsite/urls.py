@@ -16,6 +16,7 @@ Including another URLconf
 from django.conf.urls import include, url
 from django.contrib import admin
 from django.contrib.staticfiles.urls import staticfiles_urlpatterns
+from django.views.generic import RedirectView
 from localsite import settings
 import views
 
@@ -24,8 +25,9 @@ urlpatterns = [
     url(r'^$', views.index, name='index'),
     url(r'^error/$', views.error, name='error'),
     url(r'^index/$', views.index, name='index'),
-    url(r'^favicon\.ico/$', 'django.views.generic.simple.redirect_to',
-        {'url': '/static/img/favicon.ico'}),
+    # url(r'^favicon\.ico/$', 'django.views.generic.simple.redirect_to',
+    #     {'url': '/static/img/favicon.ico'}),
+    url(r'^favicon\.ico/$', RedirectView.as_view(url='/static/img/favicon.ico')),
     url(r'^websites/', include('localsite.websites.urls')),
 ]
 

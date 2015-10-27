@@ -14,7 +14,7 @@ class Migration(migrations.Migration):
             name='Websites',
             fields=[
                 ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
-                ('webseq', models.IntegerField(default=0)),
+                ('webseq', models.IntegerField(default=0, db_index=True)),
                 ('website', models.CharField(max_length=255)),
                 ('desc', models.CharField(max_length=255)),
                 ('detail', models.TextField()),

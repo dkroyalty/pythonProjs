@@ -30,19 +30,21 @@ table .name {
     width: 25%;
 }
 
-table .desc {
+.desc {
     width: 25%;
 }
 
-table .link {
+.link {
     width: 25%;
 }
 
-table .operate {
+.operate {
     width: 25%;
 }
 
-div .detail {
+div
+
+.detail {
     display: none;
     position: absolute;
     color: #3CFFFF;
@@ -52,6 +54,6 @@ div .detail {
     overflow: hidden;
 }
 
-div .detail.desc {
+.detail.desc {
     display: block;
 }

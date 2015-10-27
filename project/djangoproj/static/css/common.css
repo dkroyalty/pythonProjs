@@ -44,15 +44,28 @@ div {
   color: #FFFFFF;
 }
 
+.scorllpage{
+  overflow: hidden;
+  margin: 0;
+  padding-top: 75px;
+  position: relative;
+  text-align: center;
+  right: 0;
+  left: 0;
+  z-index: 0;
+}
+
 [role="banner"] {
   background: #0C4B33;
   overflow: hidden;
   margin: 0;
   padding: 10px 0 6px;
-  position: relative;
-  z-index: 0;
+  position: fixed;
+  top: 0;
+  right: 0;
+  left: 0;
+  z-index: 1000;
 }
-
 
 [role="banner"]:before {
   content: "";

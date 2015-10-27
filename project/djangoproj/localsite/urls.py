@@ -29,6 +29,7 @@ urlpatterns = [
     #     {'url': '/static/img/favicon.ico'}),
     url(r'^favicon\.ico/$', RedirectView.as_view(url='/static/img/favicon.ico')),
     url(r'^websites/', include('localsite.websites.urls')),
+    url(r'^saas/', include('localsite.saas.urls')),
 ]
 
 urlpatterns += staticfiles_urlpatterns()

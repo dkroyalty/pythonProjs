@@ -1,7 +1,7 @@
 from django.db import models
 
 class Websites(models.Model):
-    webseq = models.IntegerField(default=0)
+    webseq = models.IntegerField(default=0, db_index=True)
     website = models.CharField(max_length=255)
     desc = models.CharField(max_length=255)
     detail = models.TextField()

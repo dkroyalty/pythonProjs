@@ -8,17 +8,33 @@
     {% include 'common_head.html' %}
     <body>
         <div class="scorllpage">
-{% if calcresult %}
+{% if tax %}
             <div>
-                <span class="Gold"> {{ calcresult }} </span>
+                <span class="Gold"> Pay Tax : {{ tax }} </span>
+            </div>
+{% endif %}
+{% if realget %}
+            <div>
+                <span class="Gold"> Real Get : {{ realget }} </span>
             </div>
 {% endif %}
             <form name="params" action="/saas/tax" method="get">
-                <p>Start Tax Value: <input type="text" name="starttax" /></p>
-                <p>Social Security: <input type="text" name="socials" /></p>
-                <p>Total Salary: <input type="text" name="salary" /></p>
+                <p>Start Tax Value: <input type="text" name="starttax"
+                    {% if starttax %} value = {{ starttax }}  {% endif %} />
+                </p>
+                <p>Social Security: <input type="text" name="socials"
+                    {% if socials %} value = {{ socials }}  {% endif %} />
+                </p>
+                <p>Total Salary: <input type="text" name="salary"
+                    {% if salary %} value = {{ salary }}  {% endif %} />
+                </p>
+{% if other %}
+                <p>Tax by self: <input type="radio" name="type" value="self" /></p>
+                <p>Tax by other: <input type="radio" name="type" value="other" checked="checked" /></p>
+{% else %}
                 <p>Tax by self: <input type="radio" name="type" value="self" checked="checked" /></p>
                 <p>Tax by other: <input type="radio" name="type" value="other" /></p>
+{% endif %}
                 <input type="submit" value="Submit" />
             </form>
         </div>

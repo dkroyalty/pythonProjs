@@ -68,12 +68,8 @@ def getItemType(typename):
     except TypeMaster.DoesNotExist:
         return None
 
-def setPlaceData(placename, placeimg, imgrect, desc=''):
-    try:
-        placeobj = PlaceData.objects.get(placename=placename)
-        placeobj.update(placeimg=placeimg, imgrect=imgrect, placedesc=desc)
-        return placeobj
-    except PlaceData.DoesNotExist:
+def setPlaceData(placeid, placename, placeimg, imgrect, desc=''):
+    if placeid is None:
         newplacedata = PlaceData(
                 placename = placename,
                 placeimg = placeimg,
@@ -82,6 +78,17 @@ def setPlaceData(placename, placeimg, imgrect, desc=''):
             )
         newplacedata.save()
         return newplacedata
+    try:
+        placeobj = PlaceData.objects.filter(id=placeid)
+        placeobj.update(
+                placename=placename,
+                placeimg=placeimg,
+                imgrect=imgrect,
+                placedesc=desc,
+            )
+        return placeobj
+    except PlaceData.DoesNotExist:
+        return None
 
 def getPlaceData(placeid=None):
     if placeid is None:
@@ -145,7 +152,7 @@ def getItem(itemid):
 
 def updateItem(itemid, itemname, itemimg, itemtype, itemstatus, desc=''):
     try:
-        updateditem = ItemData.objects.get(id=itemid)
+        updateditem = ItemData.objects.filter(id=itemid)
         updateditem.update(
                 itemname = itemname,
                 itemimg = itemimg,
@@ -202,7 +209,7 @@ def initPlaceData():
     currentdata = getPlaceData()
     if currentdata is None or len(currentdata) > 0:
         return False
-    rootplace = setPlaceData("house", "map.png", "", "root")
-    room = setPlaceData("room", "", "0,0,512,512", "a room")
+    rootplace = setPlaceData("house", "house.png", "", "root")
+    room = setPlaceData("room", "room.png", "0,0,512,512", "a room")
     if rootplace and room:
         setPlaceRelation(rootplace, room)

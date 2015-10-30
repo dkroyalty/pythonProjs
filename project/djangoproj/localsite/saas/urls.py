@@ -7,4 +7,5 @@ urlpatterns = [
     url(r'^tax$', views.taxCalc, name='taxcalc'),
     url(r'^place/disp$', views.placeDisp, name='placedisp'),
     url(r'^place/edit$', views.placeEdit, name='placeedit'),
+    url(r'^place/edit/confirm$', views.placeEditConfirm, name='placeeditconfirm'),
 ]

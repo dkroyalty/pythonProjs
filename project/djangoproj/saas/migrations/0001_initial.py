@@ -16,7 +16,7 @@ class Migration(migrations.Migration):
             fields=[
                 ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
                 ('itemname', models.CharField(max_length=255, db_index=True)),
-                ('itemimg', models.CharField(max_length=255)),
+                ('itemimg', models.CharField(default=b'', max_length=255)),
                 ('itemdesc', models.TextField(default=b'', max_length=500)),
             ],
         ),
@@ -25,8 +25,8 @@ class Migration(migrations.Migration):
             fields=[
                 ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
                 ('placename', models.CharField(max_length=255, db_index=True)),
-                ('placeimg', models.CharField(max_length=255)),
-                ('imgrect', models.CharField(max_length=255)),
+                ('placeimg', models.CharField(default=b'', max_length=255)),
+                ('imgrect', models.CharField(default=b'', max_length=255)),
                 ('placedesc', models.TextField(default=b'', max_length=500)),
             ],
         ),

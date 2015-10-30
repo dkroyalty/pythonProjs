@@ -12,6 +12,30 @@
             <div>
                 <span class="Gold"> Place Edit Page </span>
             </div>
+{% if editplace %}
+            <form name="params" action="/saas/place/edit/confirm" method="get">
+                <p>Place Name: <input type="text" name="placename"
+                    value = {{ editplace.placename }} />
+                </p>
+                <p>Place Image: <input type="text" name="placeimg"
+                    value = {{ editplace.placeimg }} />
+                </p>
+                <p>Image Rect: <input type="text" name="imgrect"
+                    value = {{ editplace.imgrect }} />
+                </p>
+                <p>Place Desc: <input type="text" name="placedesc"
+                    value = {{ editplace.placedesc }} />
+                </p>
+                <input type="radio" checked="checked" name="choice" value="update" />
+                update <br/>
+                <input type="radio" name="choice" value="create" />
+                create <br/>
+                <input type = "hidden" name = "placeid"
+                    value = "{{ editplace.id }}"/>
+                <input type="submit" value="Submit" />
+            </form>
+{% endif %}
+
 {% if placelist %}
         <table>
             <tr>
@@ -38,7 +62,7 @@
                     {{ eachplace.placedesc }}
                 </td>
                 <td class="operate">
-                    <a href="/saas/place/edit">MOD</a>
+                    <a href="/saas/place/edit?editplace={{ eachplace.id }}">MOD</a>
                 </td>
             <tr>
 {% endfor %}

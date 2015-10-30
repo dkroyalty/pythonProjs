@@ -30,7 +30,7 @@ class StatusMaster(models.Model):
 
 class ItemData(models.Model):
     itemname = models.CharField(max_length=255, db_index=True)
-    itemimg = models.CharField(max_length=255)
+    itemimg = models.CharField(default='', max_length=255)
     itemtype = models.ForeignKey(TypeMaster, db_index=True)
     itemstatus = models.ForeignKey(StatusMaster, db_index=True)
     itemdesc = models.TextField(default='', max_length=500)
@@ -41,8 +41,8 @@ class ItemData(models.Model):
 
 class PlaceData(models.Model):
     placename = models.CharField(max_length=255, db_index=True)
-    placeimg = models.CharField(max_length=255)
-    imgrect = models.CharField(max_length=255)
+    placeimg = models.CharField(default='', max_length=255)
+    imgrect = models.CharField(default='', max_length=255)
     placedesc = models.TextField(default='', max_length=500)
 
     def __unicode__(self):

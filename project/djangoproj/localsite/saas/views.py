@@ -60,27 +60,29 @@ def convertEquation(equation):
     return rst
 
 def placeDisp(request):
-    htmltemplate = get_template('placetdisp.html')
+    htmltemplate = get_template('placedisp.html')
     initPlaceData()
     html = htmltemplate.render(Context(buildDispPlace(request)))
     return HttpResponse(html)
 
 def buildDispPlace(request):
-    basicplace = request.GET.get('dispplace', '0')
-    basicplace = int(convertEquation(basicplace))
+    basicplace = request.GET.get('dispplace', None)
     dispdict = dict()
     placedata = getPlaceData()
     if placedata is None:
         return dispdict
     dispplace = None
-    for eachplace in placedata:
-        if basicplace == eachplace.id:
-            dispplace = eachplace
+    if basicplace is None:
+        if len(placedata) > 0:
+            dispplace = placedata[0]
             dispdict['basic'] = dispplace
-            break
-    if dispplace is None and len(placedata) > 0:
-        dispplace = placedata[0]
-        dispdict['basic'] = dispplace
+    else:
+        basicplace = int(convertEquation(basicplace))
+        for eachplace in placedata:
+            if basicplace == eachplace.id:
+                dispplace = eachplace
+                dispdict['basic'] = dispplace
+                break
     if dispplace is not None:
         sonplacelist = getRelatedPlaceList(dispplace.id)
         if len(sonplacelist) > 0:
@@ -99,13 +101,38 @@ def buildContainPlace(placeidlist):
 
 def placeEdit(request):
     htmltemplate = get_template('placeedit.html')
-    html = htmltemplate.render(Context(buildAllPlaceDict()))
+    editplace = request.GET.get('editplace', None)
+    paramdict = dict()
+    if editplace is None:
+        paramdict = buildPlaceDict()
+    else:
+        placeid = int(convertEquation(editplace))
+        paramdict = buildPlaceDict(placeid)
+    html = htmltemplate.render(Context(paramdict))
     return HttpResponse(html)
 
-def buildAllPlaceDict():
+def placeEditConfirm(request):
+    placeid = request.GET.get('placeid', None)
+    placename = request.GET.get('placename', None)
+    placeimg = request.GET.get('placeimg', None)
+    imgrect = request.GET.get('imgrect', None)
+    desc = request.GET.get('placedesc', None)
+    choice = request.GET.get('choice', "update")
+    if choice != "update":
+        placeid = None
+    setPlaceData(placeid, placename, placeimg, imgrect, desc)
+    return HttpResponseRedirect("/saas/place/edit")
+
+def buildPlaceDict(placeid=None):
     placedict = dict()
     placedata = getPlaceData()
     if placedata is None:
         return placedict
     placedict['placelist'] = placedata
+    for eachplace in placedata:
+        if placeid == eachplace.id:
+            placedict['editplace'] = eachplace
+            break
     return placedict
+
+

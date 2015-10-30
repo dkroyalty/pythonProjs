@@ -59,3 +59,14 @@ def convertequation(equation):
                 print "disable convert equation: %s" % equation
     return rst
 
+def placetop(request):
+    htmltemplate = get_template('placetop.html')
+    initPlaceData()
+    placedata = getPlaceData()
+    dispdict = dict()
+    print placedata
+    if placedata is not None:
+        if len(placedata) > 0:
+            dispdict['placedata'] = placedata[0]
+    html = htmltemplate.render(Context(dispdict))
+    return HttpResponse(html)

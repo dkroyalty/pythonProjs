@@ -1,0 +1,18 @@
+{% extends "common_base.html" %}
+
+{% block setting %}
+    {% load staticfiles %}
+{% endblock %}
+
+{% block content %}
+    {% include 'common_head.html' %}
+    <body>
+        <div class="scorllpage">
+{% if placedata %}
+            <div>
+                <span class="Gold"> Place id: {{ placedata.placename }} </span>
+            </div>
+{% endif %}
+        </div>
+    </body>
+{% endblock %}

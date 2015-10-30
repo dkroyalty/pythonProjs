@@ -6,27 +6,19 @@ table {
     border-collapse: collapse;
 }
 
-tr {
-    position: relative;
-    text-align: center;
-    vertical-align: middle;
+.id {
+    width: 5%;
 }
 
-th {
-    border: 1px solid #959595;
-    font-weight: bold;
-    background-color: #CBCBCB;
-    color: #000000;
+.image {
+    width: 100px;
 }
 
-td {
-    border: 1px solid #959595;
-    background-color: #EBEBEB;
-    border-spacing: 1px;
-    color: #000000;
+.operate {
+    width: 5%;
 }
 
-table .name {
+.name {
     width: 25%;
 }
 
@@ -42,9 +34,47 @@ table .name {
     width: 25%;
 }
 
+
+tr {
+    position: relative;
+    text-align: center;
+    vertical-align: middle;
+}
+
+th {
+    border: 1px solid #959595;
+    font-weight: bold;
+    background-color: #CBCBCB;
+    color: #000000;
+    vertical-align: middle;
+}
+
+td {
+    border: 1px solid #959595;
+    background-color: #EBEBEB;
+    border-spacing: 1px;
+    color: #000000;
+    vertical-align: middle;
+}
+
+
+img {
+    left: 0%;
+    right: 0%;
+    width: 100%;
+    height: 100%;
+}
+
 div
 
-.detail {
+.thumbnail {
+    margin-left: auto;
+    margin-right: auto;
+    width: 100px;
+    height: 100px;
+}
+
+.table.detail {
     display: none;
     position: absolute;
     color: #3CFFFF;
@@ -54,6 +84,6 @@ div
     overflow: hidden;
 }
 
-.detail.desc {
+.table.detail.desc {
     display: block;
 }

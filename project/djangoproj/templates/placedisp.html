@@ -1,0 +1,26 @@
+{% extends "common_base.html" %}
+
+{% block setting %}
+    {% load staticfiles %}
+{% endblock %}
+
+{% block content %}
+    {% include 'common_head.html' %}
+    <body>
+        <div class="scorllpage">
+{% if basic %}
+            <div>
+                <span class="Gold"> Place id: {{ basic.placename }} </span>
+            </div>
+            <img title="{{ basic.placename }}" alt="{{ basic.placedesc }}"
+                usemap ="#planetmap" src="static/img/{{ basic.placeimg }}" />
+            <map name="planetmap">
+{% for eachplace in extend %}
+                <area shape="rectangle" coords="{{ eachplace.imgrect }}"
+                    title="{{ eachplace.placename }}" alt="{{ eachplace.placedesc }}"  target="_blank" href="/saas/place?dispplace={{ eachplace.id }}"/>
+{% endfor %}
+            </map>
+{% endif %}
+        </div>
+    </body>
+{% endblock %}

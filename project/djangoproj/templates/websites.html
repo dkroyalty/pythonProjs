@@ -2,7 +2,7 @@
 
 {% block setting %}
     {% load staticfiles %}
-    <link type="text/css" rel="stylesheet" href= "{% static "css/websites.css" %}" />
+    <link type="text/css" rel="stylesheet" href= "{% static "css/tables.css" %}" />
     <script src= "{% static "js/display.js" %}" ></script>
 {% endblock %}
 
@@ -26,7 +26,7 @@
                     onmouseout= "switchDisp('name_{{ webinfo.webseq }}', 'none')"
                     onclick=    "switchDisp('name_{{ webinfo.webseq }}', 'none')">
                     {{ webinfo.desc }}
-                    <div id="name_{{ webinfo.webseq }}" class="detail">
+                    <div id="name_{{ webinfo.webseq }}" class="table detail">
                         {{ webinfo.website }}
                     </div>
                 </td>
@@ -35,7 +35,7 @@
                     onmouseout= "switchDispContent('desc_{{ webinfo.webseq }}', '')"
                     onclick= "switchDispContent('desc_{{ webinfo.webseq }}', '')">
                     Detail
-                    <div id="desc_{{ webinfo.webseq }}" class="detail desc"></div>
+                    <div id="desc_{{ webinfo.webseq }}" class="table detail desc"></div>
                 </td>
                 <td class="link">
                     <a href="{{ webinfo.website }}">enter</a>

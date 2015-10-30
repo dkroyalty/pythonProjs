@@ -1,0 +1,49 @@
+{% extends "common_base.html" %}
+
+{% block setting %}
+    {% load staticfiles %}
+    <link type="text/css" rel="stylesheet" href= "{% static "css/tables.css" %}" />
+{% endblock %}
+
+{% block content %}
+    {% include 'common_head.html' %}
+    <body>
+        <div class="scorllpage">
+            <div>
+                <span class="Gold"> Place Edit Page </span>
+            </div>
+{% if placelist %}
+        <table>
+            <tr>
+                <th class="id">id</th>
+                <th class="name">name</th>
+                <th class="image">img</th>
+                <th class="desc">desc</th>
+                <th class="operate">modify</th>
+            </tr>
+{% for eachplace in placelist %}
+            <tr>
+                <td class="id">
+                    {{ eachplace.id }}
+                </td>
+                <td class="name">
+                    {{ eachplace.placename }}
+                </td>
+                <td class="image">
+                    <div class="thumbnail">
+                        <img src="static/img/{{ eachplace.placeimg }}" />
+                    </div>
+                </td>
+                <td class="desc">
+                    {{ eachplace.placedesc }}
+                </td>
+                <td class="operate">
+                    <a href="/saas/place/edit">MOD</a>
+                </td>
+            <tr>
+{% endfor %}
+        </table>
+{% endif %}
+        </div>
+    </body>
+{% endblock %}

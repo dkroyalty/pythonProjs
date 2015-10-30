@@ -13,21 +13,21 @@ from localsite.decorators import (
     valid_params,
 )
 
-def taxcalc(request):
+def taxCalc(request):
     htmltemplate = get_template('taxcalc.html')
-    calcresult = calculatetax(request)
+    calcresult = calculateTax(request)
     html = htmltemplate.render(Context(calcresult))
     return HttpResponse(html)
 
-def calculatetax(request):
+def calculateTax(request):
     starttax = request.GET.get('starttax','0')
     socials = request.GET.get('socials','0')
     salary = request.GET.get('salary','0')
     taxtype = request.GET.get('type','0')
     logger.debug("calctax: %s %s %s %s" % (starttax, socials, salary, taxtype))
-    starttax = convertequation(starttax)
-    socials = convertequation(socials)
-    salary = convertequation(salary)
+    starttax = convertEquation(starttax)
+    socials = convertEquation(socials)
+    salary = convertEquation(salary)
     if taxtype == '0':
         return "wait for input"
     initDataRecord()
@@ -47,7 +47,7 @@ def calculatetax(request):
     rst['realget'] = "%.2f" % (float(calcrst))
     return rst
 
-def convertequation(equation):
+def convertEquation(equation):
     rst = equation
     if isinstance(equation, unicode) and re.search(r'^\d', equation):
         print "fit cond : %s" % (equation)
@@ -59,14 +59,53 @@ def convertequation(equation):
                 print "disable convert equation: %s" % equation
     return rst
 
-def placetop(request):
-    htmltemplate = get_template('placetop.html')
+def placeDisp(request):
+    htmltemplate = get_template('placetdisp.html')
     initPlaceData()
-    placedata = getPlaceData()
-    dispdict = dict()
-    print placedata
-    if placedata is not None:
-        if len(placedata) > 0:
-            dispdict['placedata'] = placedata[0]
-    html = htmltemplate.render(Context(dispdict))
+    html = htmltemplate.render(Context(buildDispPlace(request)))
     return HttpResponse(html)
+
+def buildDispPlace(request):
+    basicplace = request.GET.get('dispplace', '0')
+    basicplace = int(convertEquation(basicplace))
+    dispdict = dict()
+    placedata = getPlaceData()
+    if placedata is None:
+        return dispdict
+    dispplace = None
+    for eachplace in placedata:
+        if basicplace == eachplace.id:
+            dispplace = eachplace
+            dispdict['basic'] = dispplace
+            break
+    if dispplace is None and len(placedata) > 0:
+        dispplace = placedata[0]
+        dispdict['basic'] = dispplace
+    if dispplace is not None:
+        sonplacelist = getRelatedPlaceList(dispplace.id)
+        if len(sonplacelist) > 0:
+            dispdict['extend'] = sonplacelist
+    return dispdict
+
+def buildContainPlace(placeidlist):
+    containlist = []
+    if len(placeidlist) == 0:
+        return containlist
+    for eachid in placeidlist:
+        placedata = getPlaceData(eachid)
+        if placedata is not None:
+            containlist.append(placedata)
+    return containlist
+
+def placeEdit(request):
+    htmltemplate = get_template('placeedit.html')
+    html = htmltemplate.render(Context(buildAllPlaceDict()))
+    return HttpResponse(html)
+
+def buildAllPlaceDict():
+    placedict = dict()
+    placedata = getPlaceData()
+    if placedata is None:
+        return placedict
+    placedict['placelist'] = placedata
+    return placedict

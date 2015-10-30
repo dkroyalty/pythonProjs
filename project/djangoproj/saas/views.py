@@ -50,7 +50,7 @@ def initDataRecord():
         saveNewTaxStandard(80000, 57505, 35, 5505)
         saveNewTaxStandard(0, 0, 45, 13505)
 
-def addItemType(typename):
+def setItemType(typename):
     try:
         typeobj = TypeMaster.objects.get(typename=typename)
         return typeobj
@@ -61,46 +61,89 @@ def addItemType(typename):
         newtypemst.save()
         return newtypemst
 
-def updatePlaceData(placename, placeimg, imgrect):
+def getItemType(typename):
+    try:
+        typeobj = TypeMaster.objects.get(typename=typename)
+        return typeobj
+    except TypeMaster.DoesNotExist:
+        return None
+
+def setPlaceData(placename, placeimg, imgrect, desc=''):
     try:
         placeobj = PlaceData.objects.get(placename=placename)
-        placeobj.update(placeimg=placeimg, imgrect=imgrect)
+        placeobj.update(placeimg=placeimg, imgrect=imgrect, placedesc=desc)
         return placeobj
     except PlaceData.DoesNotExist:
         newplacedata = PlaceData(
                 placename = placename,
                 placeimg = placeimg,
                 imgrect = imgrect,
+                placedesc = desc,
             )
         newplacedata.save()
         return newplacedata
 
+def getPlaceData(placeid=None):
+    if placeid is None:
+        try:
+            allplace = PlaceData.objects.all()
+            return allplace
+        except PlaceData.DoesNotExist:
+            return None
+    else:
+        try:
+            specifyplace = PlaceData.objects.get(id=placeid)
+            return specifyplace
+        except PlaceData.DoesNotExist:
+            return None
+
 def setPlaceRelation(fatherplace, sonplace):
     try:
         placeobj = PlaceRelations.objects.get(
-                placeid = fatherplace,
-                sonid = sonplace,
+                parentplace = fatherplace,
+                sonplace = sonplace,
             )
         return placeobj
     except PlaceRelations.DoesNotExist:
         newplacerelation = PlaceRelations(
-                placeid = fatherplace,
-                sonid = sonplace,
+                parentplace = fatherplace,
+                sonplace = sonplace,
             )
         newplacerelation.save()
         return newplacerelation
 
-def addNewItem(itemname, itemimg, itemtype, itemstatus):
+def getRelatedPlaceList(placeid):
+    relatedlist = []
+    placeobj = getPlaceData(placeid)
+    if placeobj is None:
+        return relatedlist
+    try:
+        relateddata = PlaceRelations.objects.filter(parentplace=placeobj)
+        for eachdata in relateddata:
+            relatedlist.append(eachdata.sonplace)
+    except PlaceRelations.DoesNotExist:
+        pass
+    return relatedlist
+
+def setItem(itemname, itemimg, itemtype, itemstatus, desc=''):
     newItem = ItemData(
             itemname = itemname,
             itemimg = itemimg,
             itemtype = itemtype,
             itemstatus = itemstatus,
+            itemdesc = desc,
         )
     newItem.save()
     return newItem
 
-def updateItemInfo(itemid, itemname, itemimg, itemtype, itemstatus):
+def getItem(itemid):
+    try:
+        itemobj = ItemData.objects.get(itemid = itemid)
+        return itemobj
+    except ItemData.DoesNotExist:
+        return None
+
+def updateItem(itemid, itemname, itemimg, itemtype, itemstatus, desc=''):
     try:
         updateditem = ItemData.objects.get(id=itemid)
         updateditem.update(
@@ -108,10 +151,11 @@ def updateItemInfo(itemid, itemname, itemimg, itemtype, itemstatus):
                 itemimg = itemimg,
                 itemtype = itemtype,
                 itemstatus = itemstatus,
+                itemdesc = desc,
             )
         return updateditem
     except ItemData.DoesNotExist:
-        return addNewItem(itemname, itemimg, itemtype)
+        return setItem(itemname, itemimg, itemtype)
 
 def clearItem(itemid):
     try:
@@ -125,47 +169,40 @@ def clearItem(itemid):
         pass
 
 def setItemInPlace(itemid, placeid):
-    try:
-        checkobj = PlaceHoldItems.objects.get(
-                placeid = placeid,
-                itemid = itemid,
-            )
-        return checkobj
-    except PlaceHoldItems.DoesNotExist:
-        newplaceitem = PlaceHoldItems(
-                placeid = placeid,
-                itemid = itemid,
-            )
-        newplaceitem.save()
-        return newplaceitem
+    itemobj = getItem(itemid)
+    placeobj = getPlaceData(placeid)
+    if itemobj and placeobj:
+        try:
+            checkobj = PlaceHoldItems.objects.get(
+                    placedata = placeobj,
+                    itemdata = itemobj,
+                )
+            return checkobj
+        except PlaceHoldItems.DoesNotExist:
+            newplaceitem = PlaceHoldItems(
+                    placedata = placeobj,
+                    itemdata = itemobj,
+                )
+            newplaceitem.save()
+            return newplaceitem
+    return None
 
 def removeItemFromPlace(itemid, placeid):
-    try:
-        target = PlaceHoldItems.objects.get(placeid=placeid, itemid=itemid)
-        target.delete()
-        return True
-    except PlaceHoldItems.DoesNotExist:
-        return False
+    itemobj = getItem(itemid)
+    placeobj = getPlaceData(placeid)
+    if itemobj and placeobj:
+        try:
+            data = PlaceHoldItems.objects.get(placedata=placeobj, itemdata=itemobj)
+            data.delete()
+            return True
+        except PlaceHoldItems.DoesNotExist:
+            return False
 
 def initPlaceData():
     currentdata = getPlaceData()
     if currentdata is None or len(currentdata) > 0:
         return False
-    rootplace = updatePlaceData("house", "map.png", "")
-    room = updatePlaceData("room", "", "0,0,512,512")
+    rootplace = setPlaceData("house", "map.png", "", "root")
+    room = setPlaceData("room", "", "0,0,512,512", "a room")
     if rootplace and room:
-        setPlaceRelation(rootplace.id, room.id)
-
-def getPlaceData(placeid=None):
-    if placeid is None:
-        try:
-            allplace = PlaceData.objects.all()
-            return allplace
-        except PlaceData.DoesNotExist:
-            return None
-    else:
-        try:
-            specifyplace = PlaceData.objects.get(placeid=placeid)
-            return specifyplace
-        except PlaceData.DoesNotExist:
-            return None
+        setPlaceRelation(rootplace, room)

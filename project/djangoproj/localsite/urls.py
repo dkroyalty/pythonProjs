@@ -27,6 +27,7 @@ urlpatterns = [
     url(r'^index/$', views.index, name='index'),
     # url(r'^favicon\.ico/$', 'django.views.generic.simple.redirect_to',
     #     {'url': '/static/img/favicon.ico'}),
+    url(r'/static/(?P<path>.*)', 'django.views.static.serve', {'document_root':settings.STATICFILES_DIRS[0]}),
     url(r'^favicon\.ico/$', RedirectView.as_view(url='/static/img/favicon.ico')),
     url(r'^websites/', include('localsite.websites.urls')),
     url(r'^saas/', include('localsite.saas.urls')),

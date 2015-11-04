@@ -1,6 +1,6 @@
 {% load staticfiles %}
-<link type="text/css" rel="stylesheet" href= "{% static "css/common.css" %}" />
-<script src= "{% static "js/common.js" %}" ></script>
+    <link type="text/css" rel="stylesheet" href= "{% static "css/common.css" %}{% if timestamp %}?v={{ timestamp }} {% endif %}" />
+    <script src= "{% static "js/common.js" %}{% if timestamp %}?v={{ timestamp }} {% endif %}" ></script>
 
 <div role="banner" id="top">
     <div class="container" id="main">
@@ -17,6 +17,18 @@
             </li>
             <li>
                 <a href="{% url 'websites' %}">Websites</a>
+            </li>
+            <li>
+                <a href="{% url 'taxcalc' %}">TaxCalculate</a>
+            </li>
+            <li>
+                <a href="{% url 'placedisp' %}">PlaceView</a>
+            </li>
+            <li>
+                <a href="{% url 'placeedit' %}">PlaceEdit</a>
+            </li>
+            <li>
+                <a href="{% url 'itemedit' %}">ItemEdit</a>
             </li>
         </ul>
         </div>

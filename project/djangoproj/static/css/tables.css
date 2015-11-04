@@ -6,32 +6,32 @@ table {
     border-collapse: collapse;
 }
 
-.id {
+.5per {
     width: 5%;
 }
 
-.image {
+.10per {
+    width: 10%;
+}
+
+.15per {
+    width: 15%;
+}
+
+.20per {
+    width: 20%;
+}
+
+.25per {
+    width: 25%;
+}
+
+.50per {
+    width: 50%;
+}
+
+.thumb {
     width: 100px;
-}
-
-.operate {
-    width: 5%;
-}
-
-.name {
-    width: 25%;
-}
-
-.desc {
-    width: 25%;
-}
-
-.link {
-    width: 25%;
-}
-
-.operate {
-    width: 25%;
 }
 
 
@@ -66,6 +66,13 @@ img {
 }
 
 div
+
+.comment {
+    margin-left: 5%;
+    text-align: left;
+    font-style: italic;
+    font-size: 1rem;
+}
 
 .thumbnail {
     margin-left: auto;

@@ -7,9 +7,9 @@
         <meta charset="UTF-8">
         {% block basic %}
             {% load staticfiles %}
-            <link type="text/css" rel="stylesheet" href= "{% static "css/default.css" %}" />
-            <link type="text/css" rel="stylesheet" href= "{% static "css/color.css" %}" />
-            <script src= "{% static "js/default.js" %}" ></script>
+            <link type="text/css" rel="stylesheet" href= "{% static "css/default.css" %}{% if timestamp %}?v={{ timestamp }} {% endif %}" />
+            <link type="text/css" rel="stylesheet" href= "{% static "css/color.css" %}{% if timestamp %}?v={{ timestamp }} {% endif %}" />
+            <script src= "{% static "js/default.js" %}{% if timestamp %}?v={{ timestamp }} {% endif %}" ></script>
         {% endblock %}
         {% block setting %}
         {% endblock %}

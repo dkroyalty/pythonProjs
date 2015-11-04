@@ -17,12 +17,18 @@ class TaxStandard(models.Model):
 class TypeMaster(models.Model):
     typename = models.CharField(max_length=255, db_index=True)
 
+    class Meta:
+        ordering = ['id']
+
     def __unicode__(self):
         return u'%s' % (typename)
 
 
 class StatusMaster(models.Model):
     status = models.CharField(max_length=255, db_index=True)
+
+    class Meta:
+        ordering = ['id']
 
     def __unicode__(self):
         return u'%s' % (status)

@@ -9,15 +9,15 @@ logger = logging.getLogger('localsite')
 import datetime
 import re
 from saas.views import *
-from localsite.decorators import (
-    valid_params,
-)
+from localsite.decorators import *
 
+@std_render_html
 def taxCalc(request):
-    htmltemplate = get_template('taxcalc.html')
-    calcresult = calculateTax(request)
-    html = htmltemplate.render(Context(calcresult))
-    return HttpResponse(html)
+    retdict = {
+        'template'  :   'taxcalc.html',
+        'paramdict' :   calculateTax(request),
+    }
+    return retdict
 
 def calculateTax(request):
     starttax = request.GET.get('starttax','0')
@@ -59,11 +59,13 @@ def convertEquation(equation):
                 print "disable convert equation: %s" % equation
     return rst
 
+@std_render_html
 def placeDisp(request):
-    htmltemplate = get_template('placedisp.html')
-    initPlaceData()
-    html = htmltemplate.render(Context(buildDispPlace(request)))
-    return HttpResponse(html)
+    retdict = {
+        'template'  :   'placedisp.html',
+        'paramdict' :   buildDispPlace(request),
+    }
+    return retdict
 
 def buildDispPlace(request):
     basicplace = request.GET.get('dispplace', None)
@@ -99,8 +101,8 @@ def buildContainPlace(placeidlist):
             containlist.append(placedata)
     return containlist
 
+@std_render_html
 def placeEdit(request):
-    htmltemplate = get_template('placeedit.html')
     editplace = request.GET.get('editplace', None)
     paramdict = dict()
     if editplace is None:
@@ -108,9 +110,13 @@ def placeEdit(request):
     else:
         placeid = int(convertEquation(editplace))
         paramdict = buildPlaceDict(placeid)
-    html = htmltemplate.render(Context(paramdict))
-    return HttpResponse(html)
+    retdict = {
+        'template'  :   'placeedit.html',
+        'paramdict' :   paramdict,
+    }
+    return retdict
 
+@std_redirect_url
 def placeEditConfirm(request):
     placeid = request.GET.get('placeid', None)
     placename = request.GET.get('placename', None)
@@ -118,21 +124,80 @@ def placeEditConfirm(request):
     imgrect = request.GET.get('imgrect', None)
     desc = request.GET.get('placedesc', None)
     choice = request.GET.get('choice', "update")
+    imgfile = request.GET.get('imgfile', None)
     if choice != "update":
         placeid = None
+    if imgfile is not None:
+        placeimg = imgfile
     setPlaceData(placeid, placename, placeimg, imgrect, desc)
-    return HttpResponseRedirect("/saas/place/edit")
+    return "/saas/place/edit"
 
 def buildPlaceDict(placeid=None):
     placedict = dict()
     placedata = getPlaceData()
     if placedata is None:
         return placedict
-    placedict['placelist'] = placedata
-    for eachplace in placedata:
-        if placeid == eachplace.id:
-            placedict['editplace'] = eachplace
-            break
+    if len(placedata) > 0:
+        placedict['placelist'] = placedata
+        for eachplace in placedata:
+            if placeid == eachplace.id:
+                placedict['editplace'] = eachplace
+                break
+    else:
+        placedict['empty'] = 1
     return placedict
 
+@std_render_html
+def itemEdit(request):
+    initItemTypeData()
+    initItemStatusData()
+    paramdict = dict()
+    edititem = request.GET.get('edititem', None)
+    paramdict = dict()
+    if edititem is None:
+        paramdict = buildItemDict()
+    else:
+        itemid = int(convertEquation(edititem))
+        paramdict = buildItemDict(itemid)
+    retdict = {
+        'template'  :   'itemedit.html',
+        'paramdict' :   paramdict,
+    }
+    return retdict
+
+def buildItemDict(itemid=None):
+    itemdict = dict()
+    itemdata = getItemData()
+    if itemdata is None:
+        return itemdict
+    if len(itemdata) > 0:
+        itemdict['itemlist'] = itemdata
+        for eachitem in itemdata:
+            if itemid == eachitem.id:
+                print ">>>>> %d" % (itemid)
+                itemdict['edititem'] = eachitem
+                break
+    else:
+        itemdict['empty'] = 1
+    itemdict['typelist'] = getItemType()
+    itemdict['statuslist'] = getItemStatus()
+    return itemdict
+
+@std_redirect_url
+def itemEditConfirm(request):
+    itemname = request.GET.get('itemname', None)
+    itemimg = request.GET.get('itemimg', None)
+    itemtype = request.GET.get('itemtype', None)
+    status = request.GET.get('itemstatus', None)
+    desc = request.GET.get('itemdesc', None)
+    choice = request.GET.get('choice', "update")
+    imgfile = request.GET.get('imgfile', None)
+    itemid = request.GET.get('itemid', None)
+    if imgfile is not None:
+        itemimg = imgfile
+    if choice != "update":
+        setItemData(itemname, itemimg, itemtype, status, desc)
+    else:
+        updateItemData(itemid, itemname, itemimg, itemtype, status, desc)
+    return "/saas/item/edit"
 

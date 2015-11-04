@@ -2,8 +2,8 @@
 
 {% block setting %}
     {% load staticfiles %}
-    <link type="text/css" rel="stylesheet" href= "{% static "css/tables.css" %}" />
-    <script src= "{% static "js/display.js" %}" ></script>
+    <link type="text/css" rel="stylesheet" href= "{% static "css/tables.css" %}{% if timestamp %}?v={{ timestamp }} {% endif %}" />
+    <script src= "{% static "js/display.js" %}{% if timestamp %}?v={{ timestamp }} {% endif %}" ></script>
 {% endblock %}
 
 {% block content %}
@@ -14,14 +14,14 @@
     <div class="scorllpage">
         <table>
             <tr>
-                <th class="name">Name</th>
-                <th class="desc">Desc</th>
-                <th class="link">Entrance</th>
-                <th class="operate">Operate</th>
+                <th class="20per">Name</th>
+                <th class="50per">Desc</th>
+                <th class="15per">Entrance</th>
+                <th class="15per">Operate</th>
             </tr>
         {% for webinfo in weblist %}
             <tr>
-                <td class="name"
+                <td class="20per"
                     onmouseover="switchDisp('name_{{ webinfo.webseq }}', 'inline')"
                     onmouseout= "switchDisp('name_{{ webinfo.webseq }}', 'none')"
                     onclick=    "switchDisp('name_{{ webinfo.webseq }}', 'none')">
@@ -30,17 +30,17 @@
                         {{ webinfo.website }}
                     </div>
                 </td>
-                <td class="desc"
+                <td class="50per"
                     onmouseover="switchDispContent('desc_{{ webinfo.webseq }}', '{{ webinfo.detail }}')"
                     onmouseout= "switchDispContent('desc_{{ webinfo.webseq }}', '')"
                     onclick= "switchDispContent('desc_{{ webinfo.webseq }}', '')">
                     Detail
                     <div id="desc_{{ webinfo.webseq }}" class="table detail desc"></div>
                 </td>
-                <td class="link">
+                <td class="15per">
                     <a href="{{ webinfo.website }}">enter</a>
                 </td>
-                <td class="operate">
+                <td class="15per">
                     <a href="{% url 'webedit' 'delete' webinfo.webseq %}">delete</a>
                 </td>
             </tr>

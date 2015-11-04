@@ -13,7 +13,7 @@
                 <span class="Gold"> Place id: {{ basic.placename }} </span>
             </div>
             <img title="{{ basic.placename }}" alt="{{ basic.placedesc }}"
-                usemap ="#planetmap" src="static/img/{{ basic.placeimg }}" />
+                usemap ="#planetmap" src="static/img/place/{{ basic.placeimg }}" />
             <map name="planetmap">
 {% for eachplace in extend %}
                 <area shape="rectangle" coords="{{ eachplace.imgrect }}"

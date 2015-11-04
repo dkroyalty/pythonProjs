@@ -1,4 +1,5 @@
 from saas.models import *
+from django.db.models.loading import get_model
 
 def getOrderedTaxStandard():
     try:
@@ -61,11 +62,41 @@ def setItemType(typename):
         newtypemst.save()
         return newtypemst
 
-def getItemType(typename):
+def getItemType(typename=None):
+    if typename is None:
+        try:
+            alltype = TypeMaster.objects.all()
+            return alltype
+        except TypeMaster.DoesNotExist:
+            return None
     try:
         typeobj = TypeMaster.objects.get(typename=typename)
         return typeobj
     except TypeMaster.DoesNotExist:
+        return None
+
+def setItemStatus(statusname):
+    try:
+        statusobj = StatusMaster.objects.get(status=statusname)
+        return statusobj
+    except StatusMaster.DoesNotExist:
+        newstatusmst = StatusMaster(
+                status = statusname,
+            )
+        newstatusmst.save()
+        return newstatusmst
+
+def getItemStatus(statusname=None):
+    if statusname is None:
+        try:
+            alltype = StatusMaster.objects.all()
+            return alltype
+        except StatusMaster.DoesNotExist:
+            return None
+    try:
+        statusobj = StatusMaster.objects.get(status=statusname)
+        return statusobj
+    except StatusMaster.DoesNotExist:
         return None
 
 def setPlaceData(placeid, placename, placeimg, imgrect, desc=''):
@@ -132,37 +163,59 @@ def getRelatedPlaceList(placeid):
         pass
     return relatedlist
 
-def setItem(itemname, itemimg, itemtype, itemstatus, desc=''):
+def setItemData(itemname, itemimg, itemtype, itemstatus, desc=''):
+    itemtypemst = getItemType(itemtype)
+    if itemtypemst is None:
+        print "no such type: %s" % (itemtype)
+        return None
+    itemstatusmst = getItemStatus(itemstatus)
+    if itemstatusmst is None:
+        print "no such status: %s" % (itemstatus)
+        return None
     newItem = ItemData(
             itemname = itemname,
             itemimg = itemimg,
-            itemtype = itemtype,
-            itemstatus = itemstatus,
+            itemtype = itemtypemst,
+            itemstatus = itemstatusmst,
             itemdesc = desc,
         )
     newItem.save()
     return newItem
 
-def getItem(itemid):
+def getItemData(itemid=None):
+    if itemid is None:
+        try:
+            allitem = ItemData.objects.all()
+            return allitem
+        except ItemData.DoesNotExist:
+            return None
     try:
         itemobj = ItemData.objects.get(itemid = itemid)
         return itemobj
     except ItemData.DoesNotExist:
         return None
 
-def updateItem(itemid, itemname, itemimg, itemtype, itemstatus, desc=''):
+def updateItemData(itemid, itemname, itemimg, itemtype, itemstatus, desc=''):
+    itemtypemst = getItemType(itemtype)
+    if itemtypemst is None:
+        print "no such type: %s" % (itemtype)
+        return None
+    itemstatusmst = getItemStatus(itemstatus)
+    if itemstatusmst is None:
+        print "no such status: %s" % (itemstatus)
+        return None
     try:
         updateditem = ItemData.objects.filter(id=itemid)
         updateditem.update(
                 itemname = itemname,
                 itemimg = itemimg,
-                itemtype = itemtype,
-                itemstatus = itemstatus,
+                itemtype = itemtypemst,
+                itemstatus = itemstatusmst,
                 itemdesc = desc,
             )
         return updateditem
     except ItemData.DoesNotExist:
-        return setItem(itemname, itemimg, itemtype)
+        return setItemData(itemname, itemimg, itemtype)
 
 def clearItem(itemid):
     try:
@@ -176,7 +229,7 @@ def clearItem(itemid):
         pass
 
 def setItemInPlace(itemid, placeid):
-    itemobj = getItem(itemid)
+    itemobj = getItemData(itemid)
     placeobj = getPlaceData(placeid)
     if itemobj and placeobj:
         try:
@@ -195,7 +248,7 @@ def setItemInPlace(itemid, placeid):
     return None
 
 def removeItemFromPlace(itemid, placeid):
-    itemobj = getItem(itemid)
+    itemobj = getItemData(itemid)
     placeobj = getPlaceData(placeid)
     if itemobj and placeobj:
         try:
@@ -205,11 +258,21 @@ def removeItemFromPlace(itemid, placeid):
         except PlaceHoldItems.DoesNotExist:
             return False
 
-def initPlaceData():
-    currentdata = getPlaceData()
-    if currentdata is None or len(currentdata) > 0:
-        return False
-    rootplace = setPlaceData("house", "house.png", "", "root")
-    room = setPlaceData("room", "room.png", "0,0,512,512", "a room")
-    if rootplace and room:
-        setPlaceRelation(rootplace, room)
+def initItemTypeData():
+    typeall = getItemType()
+    if typeall is not None and len(typeall) > 0:
+        return
+    setItemType('type1')
+    setItemType('type2')
+    setItemType('type3')
+    setItemType('type4')
+
+def initItemStatusData():
+    statusall = getItemStatus()
+    if statusall is not None and len(statusall) > 0:
+        return
+    setItemStatus('stored')
+    setItemStatus('using')
+    setItemStatus('lost')
+    setItemStatus('dropped')
+

@@ -2,8 +2,8 @@
 
 {% block setting %}
     {% load staticfiles %}
-    <link type="text/css" rel="stylesheet" href= "{% static "css/index.css" %}" />
-    <script src= "{% static "js/timefunc.js" %}" ></script>
+    <link type="text/css" rel="stylesheet" href= "{% static "css/index.css" %}{% if timestamp %}?v={{ timestamp }} {% endif %}" />
+    <script src= "{% static "js/timefunc.js" %}{% if timestamp %}?v={{ timestamp }} {% endif %}" ></script>
 {% endblock %}
 
 {% block content %}

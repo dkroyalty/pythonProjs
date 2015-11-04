@@ -2,7 +2,7 @@
 
 {% block setting %}
     {% load staticfiles %}
-    <script src= "{% static "js/timefunc.js" %}" ></script>
+    <script src= "{% static "js/timefunc.js" %}{% if timestamp %}?v={{ timestamp }} {% endif %}" ></script>
 {% endblock %}
 
 {% block content %}

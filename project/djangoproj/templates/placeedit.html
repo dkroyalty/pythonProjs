@@ -2,7 +2,7 @@
 
 {% block setting %}
     {% load staticfiles %}
-    <link type="text/css" rel="stylesheet" href= "{% static "css/tables.css" %}" />
+    <link type="text/css" rel="stylesheet" href= "{% static "css/tables.css" %}{% if timestamp %}?v={{ timestamp }} {% endif %}" />
 {% endblock %}
 
 {% block content %}
@@ -12,7 +12,22 @@
             <div>
                 <span class="Gold"> Place Edit Page </span>
             </div>
-{% if editplace %}
+{% if empty %}
+            <form name="params" action="/saas/place/edit/confirm" method="get">
+                <p>Place Name: <input type="text" name="placename" />
+                </p>
+                <p>Place Image: <input type="text" name="placeimg" />
+                </p>
+                <input type="file" name="imgfile" id="fileImg" />
+                <p>Image Rect: <input type="text" name="imgrect" />
+                </p>
+                <p>Place Desc: <input type="text" name="placedesc" />
+                </p>
+                <input type="hidden" name="choice" value="create" />
+                <input type="submit" value="Submit" />
+            </form>
+{% else %}
+    {% if editplace %}
             <form name="params" action="/saas/place/edit/confirm" method="get">
                 <p>Place Name: <input type="text" name="placename"
                     value = {{ editplace.placename }} />
@@ -20,6 +35,7 @@
                 <p>Place Image: <input type="text" name="placeimg"
                     value = {{ editplace.placeimg }} />
                 </p>
+                <input type="file" name="imgfile" id="fileImg" />
                 <p>Image Rect: <input type="text" name="imgrect"
                     value = {{ editplace.imgrect }} />
                 </p>
@@ -34,34 +50,36 @@
                     value = "{{ editplace.id }}"/>
                 <input type="submit" value="Submit" />
             </form>
+    {% endif %}
 {% endif %}
+
 
 {% if placelist %}
         <table>
             <tr>
-                <th class="id">id</th>
-                <th class="name">name</th>
-                <th class="image">img</th>
-                <th class="desc">desc</th>
-                <th class="operate">modify</th>
+                <th class="5per">id</th>
+                <th class="15per">name</th>
+                <th class="thumb">img</th>
+                <th class="25per">desc</th>
+                <th class="10per">modify</th>
             </tr>
 {% for eachplace in placelist %}
             <tr>
-                <td class="id">
+                <td class="5per">
                     {{ eachplace.id }}
                 </td>
-                <td class="name">
+                <td class="15per">
                     {{ eachplace.placename }}
                 </td>
-                <td class="image">
+                <td class="thumb">
                     <div class="thumbnail">
-                        <img src="static/img/{{ eachplace.placeimg }}" />
+                        <img src="static/img/place/{{ eachplace.placeimg }}" />
                     </div>
                 </td>
-                <td class="desc">
+                <td class="25per">
                     {{ eachplace.placedesc }}
                 </td>
-                <td class="operate">
+                <td class="10per">
                     <a href="/saas/place/edit?editplace={{ eachplace.id }}">MOD</a>
                 </td>
             <tr>

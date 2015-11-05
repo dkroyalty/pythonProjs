@@ -14,15 +14,14 @@
     <div class="scorllpage">
         <table>
             <tr>
-                <th class="20per">Name</th>
-                <th class="50per">Desc</th>
-                <th class="15per">Entrance</th>
-                <th class="15per">Operate</th>
+                <th>Name</th>
+                <th>Desc</th>
+                <th>Entrance</th>
+                <th>Operate</th>
             </tr>
         {% for webinfo in weblist %}
             <tr>
-                <td class="20per"
-                    onmouseover="switchDisp('name_{{ webinfo.webseq }}', 'inline')"
+                <td onmouseover="switchDisp('name_{{ webinfo.webseq }}', 'inline')"
                     onmouseout= "switchDisp('name_{{ webinfo.webseq }}', 'none')"
                     onclick=    "switchDisp('name_{{ webinfo.webseq }}', 'none')">
                     {{ webinfo.desc }}
@@ -30,17 +29,16 @@
                         {{ webinfo.website }}
                     </div>
                 </td>
-                <td class="50per"
-                    onmouseover="switchDispContent('desc_{{ webinfo.webseq }}', '{{ webinfo.detail }}')"
+                <td onmouseover="switchDispContent('desc_{{ webinfo.webseq }}', '{{ webinfo.detail }}')"
                     onmouseout= "switchDispContent('desc_{{ webinfo.webseq }}', '')"
                     onclick= "switchDispContent('desc_{{ webinfo.webseq }}', '')">
                     Detail
                     <div id="desc_{{ webinfo.webseq }}" class="table detail desc"></div>
                 </td>
-                <td class="15per">
+                <td>
                     <a href="{{ webinfo.website }}">enter</a>
                 </td>
-                <td class="15per">
+                <td>
                     <a href="{% url 'webedit' 'delete' webinfo.webseq %}">delete</a>
                 </td>
             </tr>

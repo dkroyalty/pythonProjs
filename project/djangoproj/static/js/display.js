@@ -12,19 +12,20 @@ function switchDisp(dispid, dispstyle) {
     console.debug("switch "+dispid+" display :"+dispstyle);
 }
 
-function setMultiSelected(elemids, setvalues) {
-    var elemarr=elemids.split(',');
-    var valuearr=setvalues.split(',');
-    if (elemarr.length != valuearr.length) {
-        return;
+function setItemSelectOption(itemJsData)
+{
+    console.debug("receive item js: "+itemJsData);
+    var eachItemArr = itemJsData.split('|');
+    for(var i=0; i<eachItemArr.length; i++){
+        console.debug("build item js: "+eachItemArr[i]);
+        var itemdata = eachItemArr[i].split(',');
+        setElemSelected("select_type_"+itemdata[0], itemdata[1])
+        setElemSelected("select_status_"+itemdata[0], itemdata[2])
     }
-    for (var i = elemarr.length - 1; i >= 0; i--) {
-        console.debug(elemarr[i]+" -> "+valuearr[i]);
-        setElemSelected(elemarr[i], valuearr[i]);
-    };
 }
 
 function setElemSelected(elemid, selectcond) {
+    console.debug("set elem "+elemid+" -> "+selectcond);
     var opts = document.getElementById(elemid);
     if(selectcond != ""){
         for(var i=0; i<opts.options.length; i++){

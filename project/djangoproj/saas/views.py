@@ -62,18 +62,27 @@ def setItemType(typename):
         newtypemst.save()
         return newtypemst
 
-def getItemType(typename=None):
-    if typename is None:
+def getItemType(typeid=None):
+    if typeid is None:
         try:
             alltype = TypeMaster.objects.all()
             return alltype
         except TypeMaster.DoesNotExist:
             return None
     try:
-        typeobj = TypeMaster.objects.get(typename=typename)
+        typeobj = TypeMaster.objects.get(id=typeid)
         return typeobj
     except TypeMaster.DoesNotExist:
         return None
+
+def updateItemType(typeid, typename):
+    try:
+        TypeMaster.objects.filter(id=typeid).update(
+                typename=typename,
+            )
+        return True
+    except TypeMaster.DoesNotExist:
+        return False
 
 def setItemStatus(statusname):
     try:
@@ -86,18 +95,27 @@ def setItemStatus(statusname):
         newstatusmst.save()
         return newstatusmst
 
-def getItemStatus(statusname=None):
-    if statusname is None:
+def getItemStatus(statusid=None):
+    if statusid is None:
         try:
             alltype = StatusMaster.objects.all()
             return alltype
         except StatusMaster.DoesNotExist:
             return None
     try:
-        statusobj = StatusMaster.objects.get(status=statusname)
+        statusobj = StatusMaster.objects.get(id=statusid)
         return statusobj
     except StatusMaster.DoesNotExist:
         return None
+
+def updateItemStatus(statusid, statusname):
+    try:
+        StatusMaster.objects.filter(id=statusid).update(
+                status=statusname,
+            )
+        return True
+    except StatusMaster.DoesNotExist:
+        return False
 
 def setPlaceData(placeid, placename, placeimg, imgrect, desc=''):
     if placeid is None:
@@ -135,6 +153,21 @@ def getPlaceData(placeid=None):
         except PlaceData.DoesNotExist:
             return None
 
+def deletePlaceData(placeid):
+    deleteRelatedPlace(placeid)
+    placeobj = getPlaceData(placeid)
+    if placeobj is None:
+        return False
+    try:
+        PlaceHoldItems.objects.filter(placedata=placeobj).delete()
+    except PlaceHoldItems.DoesNotExist:
+        return False
+    try:
+        PlaceData.objects.filter(id=placeid).delete()
+    except PlaceData.DoesNotExist:
+        return False
+    return True
+
 def setPlaceRelation(fatherplace, sonplace):
     try:
         placeobj = PlaceRelations.objects.get(
@@ -162,6 +195,18 @@ def getRelatedPlaceList(placeid):
     except PlaceRelations.DoesNotExist:
         pass
     return relatedlist
+
+def deleteRelatedPlace(placeid):
+    relatedlist = []
+    placeobj = getPlaceData(placeid)
+    if placeobj is None:
+        return False
+    try:
+        PlaceRelations.objects.filter(parentplace=placeobj).delete()
+        PlaceRelations.objects.filter(sonplace=placeobj).delete()
+    except PlaceRelations.DoesNotExist:
+        return False
+    return True
 
 def setItemData(itemname, itemimg, itemtype, itemstatus, desc=''):
     itemtypemst = getItemType(itemtype)

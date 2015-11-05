@@ -103,13 +103,8 @@ def buildContainPlace(placeidlist):
 
 @std_render_html
 def placeEdit(request):
-    editplace = request.GET.get('editplace', None)
     paramdict = dict()
-    if editplace is None:
-        paramdict = buildPlaceDict()
-    else:
-        placeid = int(convertEquation(editplace))
-        paramdict = buildPlaceDict(placeid)
+    paramdict = buildPlaceDict()
     retdict = {
         'template'  :   'placeedit.html',
         'paramdict' :   paramdict,
@@ -123,13 +118,21 @@ def placeEditConfirm(request):
     placeimg = request.GET.get('placeimg', None)
     imgrect = request.GET.get('imgrect', None)
     desc = request.GET.get('placedesc', None)
-    choice = request.GET.get('choice', "update")
+    choice = request.GET.get('choice', None)
     imgfile = request.GET.get('imgfile', None)
-    if choice != "update":
-        placeid = None
     if imgfile is not None:
         placeimg = imgfile
-    setPlaceData(placeid, placename, placeimg, imgrect, desc)
+    if choice is None:
+        pass
+    elif choice in ['update', 'create']:
+        setPlaceData(placeid, placename, placeimg, imgrect, desc)
+    elif choice == 'delete':
+        print "delete place"
+        print placeid
+        deletePlaceData(placeid)
+    else:
+        print "unrecognized choice:"
+        print choice
     return "/saas/place/edit"
 
 def buildPlaceDict(placeid=None):
@@ -139,12 +142,6 @@ def buildPlaceDict(placeid=None):
         return placedict
     if len(placedata) > 0:
         placedict['placelist'] = placedata
-        for eachplace in placedata:
-            if placeid == eachplace.id:
-                placedict['editplace'] = eachplace
-                break
-    else:
-        placedict['empty'] = 1
     return placedict
 
 @std_render_html
@@ -172,13 +169,8 @@ def buildItemDict(itemid=None):
         return itemdict
     if len(itemdata) > 0:
         itemdict['itemlist'] = itemdata
-        for eachitem in itemdata:
-            if itemid == eachitem.id:
-                print ">>>>> %d" % (itemid)
-                itemdict['edititem'] = eachitem
-                break
-    else:
-        itemdict['empty'] = 1
+        jsData = '|'.join([item.toJsData() for item in itemdata])
+        itemdict['jsData'] = jsData
     itemdict['typelist'] = getItemType()
     itemdict['statuslist'] = getItemStatus()
     return itemdict
@@ -201,3 +193,36 @@ def itemEditConfirm(request):
         updateItemData(itemid, itemname, itemimg, itemtype, status, desc)
     return "/saas/item/edit"
 
+@std_redirect_url
+def itemEditType(request):
+    typeid = request.GET.get('typeid', None)
+    typename = request.GET.get('typename', None)
+    choice = request.GET.get('choice', None)
+    if typename is None:
+        return "/saas/item/edit"
+    if choice is None:
+        pass
+    elif choice == "update":
+        if typeid is None:
+            return "/saas/item/edit"
+        updateItemType(typeid, typename)
+    elif choice == "create":
+        setItemType(typename)
+    return "/saas/item/edit"
+
+@std_redirect_url
+def itemEditStatus(request):
+    statusid = request.GET.get('statusid', None)
+    statusname = request.GET.get('statusname', None)
+    choice = request.GET.get('choice', None)
+    if statusname is None:
+        return "/saas/item/edit"
+    if choice is None:
+        pass
+    elif choice == "update":
+        if statusid is None:
+            return "/saas/item/edit"
+        updateItemStatus(statusid, statusname)
+    elif choice == "create":
+        setItemStatus(statusname)
+    return "/saas/item/edit"

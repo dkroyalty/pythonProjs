@@ -1,39 +1,11 @@
 
 table {
-    margin-left: 2%;
+    margin: 0 2%;
     width: 96%;
     color: #FFFFFF;
     border-collapse: collapse;
+    padding: 2rem 2rem;
 }
-
-.5per {
-    width: 5%;
-}
-
-.10per {
-    width: 10%;
-}
-
-.15per {
-    width: 15%;
-}
-
-.20per {
-    width: 20%;
-}
-
-.25per {
-    width: 25%;
-}
-
-.50per {
-    width: 50%;
-}
-
-.thumb {
-    width: 100px;
-}
-
 
 tr {
     position: relative;

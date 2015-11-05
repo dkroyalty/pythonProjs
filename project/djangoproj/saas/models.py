@@ -42,7 +42,10 @@ class ItemData(models.Model):
     itemdesc = models.TextField(default='', max_length=500)
 
     def __unicode__(self):
-        return u'%s\t%d\t%s' % (self.itemname, self.itemtype, self.itemimg)
+        return u'%s\t%s\t%s' % (self.itemname, self.itemtype.typename, self.itemstatus.status)
+
+    def toJsData(self):
+        return u'%d,%d,%d' % (self.id, self.itemtype.id, self.itemstatus.id)
 
 
 class PlaceData(models.Model):

@@ -9,8 +9,8 @@
 {% block content %}
     {% include 'common_head.html' %}
 
-{% if edititem %}
-    <body onload="setMultiSelected('typeselect,statusselect', '{{ edititem.itemtype.typename }},{{ edititem.itemstatus.status }}')">
+{% if jsData %}
+    <body onload="setItemSelectOption('{{ jsData }}')">
 {% else %}
     <body>
 {% endif %}
@@ -18,111 +18,153 @@
             <div>
                 <span class="Gold"> Item Edit Page </span>
             </div>
+        <hr/>
+        <h3>Item Types</h3>
+{% if typelist %}
+        <table>
+            <tr>
+                <th>id</th>
+                <th>type</th>
+                <th>operate</th>
+            </tr>
+    {% for eachtype in typelist %}
+            <tr>
+                <form name="params" action="/saas/item/edittype" method="get">
+                    <input type="hidden" name="typeid" value="{{ eachtype.id }}" />
+                    <input type="hidden" name="choice" value="update" />
+                    <td>{{ eachtype.id }}</td>
+                    <td><input type="text" name="typename" value="{{ eachtype.typename }}" /></td>
+                    <td><input type="submit" value="Update" /></td>
+                </form>
+            </tr>
+    {% endfor %}
+            <tr>
+                <form name="params" action="/saas/item/edittype" method="get">
+                    <input type="hidden" name="choice" value="create" />
+                    <td>add type</td>
+                    <td><input type="text" name="typename" /></td>
+                    <td><input type="submit" value="Add New" /></td>
+                </form>
+            </tr>
+        </table>
+{% endif %}
 
-{% if empty %}
+        <hr/>
+        <h3>Item Status</h3>
+{% if statuslist %}
+        <table>
+            <tr>
+                <th>id</th>
+                <th>status</th>
+                <th>operate</th>
+            </tr>
+    {% for eachstatus in statuslist %}
+            <tr>
+                <form name="params" action="/saas/item/editstatus" method="get">
+                    <input type="hidden" name="statusid" value="{{ eachstatus.id }}" />
+                    <input type="hidden" name="choice" value="update" />
+                    <td>{{ eachstatus.id }}</td>
+                    <td><input type="text" name="statusname" value="{{ eachstatus.status }}" /></td>
+                    <td><input type="submit" value="Update" /></td>
+                </form>
+            </tr>
+    {% endfor %}
+            <tr>
+                <form name="params" action="/saas/item/editstatus" method="get">
+                    <input type="hidden" name="choice" value="create" />
+                    <td>add status</td>
+                    <td><input type="text" name="statusname" /></td>
+                    <td><input type="submit" value="Add New" /></td>
+                </form>
+            </tr>
+        </table>
+{% endif %}
+
+        <hr/>
+        <h3>Add New Item</h3>
+        <table>
+            <tr>
+                <th>name</th>
+                <th>img</th>
+                <th>type</th>
+                <th>status</th>
+                <th>desc</th>
+                <th>operate</th>
+            </tr>
+            <tr>
             <form name="params" action="/saas/item/edit/confirm" method="get">
-                <p>Item Name: <input type="text" name="itemname" />
-                </p>
-                <p>Item Image: <input type="text" name="itemimg" />
-                </p>
-                <input type="file" name="imgfile" id="fileImg" />
-                <p>Item Type:
+                <input type="hidden" name="choice" value="create" />
+                <td><input type="text" name="itemname" /></td>
+                <td><input type="text" name="itemimg" />
+                    <input type="file" name="imgfile" id="fileImg" /></td>
+                <td>
                     <select name="itemtype">
 {% for eachtype in typelist %}
-                        <option value={{ eachtype.typename }}>
+                        <option value="{{ eachtype.id }}">
                             {{ eachtype.typename }}
                         </option>
 {% endfor %}
                     </select>
-                </p>
-                <p>Item Status:
+                </td>
+                <td>
                     <select name="itemstatus">
 {% for eachstatus in statuslist %}
-                        <option value={{ eachstatus.status }}>
+                        <option value="{{ eachstatus.id }}">
                             {{ eachstatus.status }}
                         </option>
 {% endfor %}
                     </select>
-                </p>
-                <p>Item Desc: <input type="text" name="itemdesc" />
-                </p>
-                <input type="hidden" name="choice" value="create" />
-                <input type="submit" value="Submit" />
+                </td>
+                <td><input type="text" name="itemdesc" /></td>
+                <td><input type="submit" value="Add New" /></td>
             </form>
-{% else %}
-    {% if edititem %}
-            <form name="params" action="/saas/item/edit/confirm" method="get">
-                <p>Item Name: <input type="text" name="itemname"
-                    value = {{ edititem.itemname }} />
-                </p>
-                <p>Item Image: <input type="text" name="itemimg"
-                    value = {{ edititem.itemimg }} />
-                </p>
-                <input type="file" name="imgfile" id="fileImg" />
-                <p>Item Type:
-                    <select name="itemtype" id="typeselect">
-    {% for eachtype in typelist %}
-                        <option value={{ eachtype.typename }}> {{ eachtype.typename }} </option>
-    {% endfor %}
-                    </select>
-                </p>
-                <p>Item Status:
-                    <select name="itemstatus" id="statusselect">
-    {% for eachstatus in statuslist %}
-                        <option value={{ eachstatus.status }}> {{ eachstatus.status }} </option>
-    {% endfor %}
-                    </select>
-                </p>
-                <p>Item Desc: <input type="text" name="itemdesc"
-                    value = {{ edititem.itemdesc }} />
-                </p>
-                <input type="radio" checked="checked" name="choice" value="update" />
-                update <br/>
-                <input type="radio" name="choice" value="create" />
-                create <br/>
-                <input type = "hidden" name = "itemid"
-                    value = "{{ edititem.id }}"/>
-                <input type="submit" value="Submit" />
-            </form>
-    {% endif %}
-{% endif %}
+            </tr>
+        </table>
+        <hr/>
+        <h3>Current Items</h3>
 
 {% if itemlist %}
         <table>
             <tr>
-                <th class="5per">id</th>
-                <th class="10per">name</th>
-                <th class="thumb">img</th>
-                <th class="10per">type</th>
-                <th class="10per">status</th>
-                <th class="25per">desc</th>
-                <th class="10per">modify</th>
+                <th>id</th>
+                <th>name</th>
+                <th>img</th>
+                <th>type</th>
+                <th>status</th>
+                <th>desc</th>
+                <th>modify</th>
             </tr>
 {% for eachitem in itemlist %}
             <tr>
-                <td class="5per">
-                    {{ eachitem.id }}
-                </td>
-                <td class="10per">
-                    {{ eachitem.itemname }}
-                </td>
-                <td class="thumb">
-                    <div class="thumbnail">
-                        <img src="static/img/item/{{ eachitem.itemimg }}" />
-                    </div>
-                </td>
-                <td class="10per">
-                    {{ eachitem.itemtype.typename }}
-                </td>
-                <td class="10per">
-                    {{ eachitem.itemstatus.status }}
-                </td>
-                <td class="25per">
-                    {{ eachitem.itemstatus.itemdesc }}
-                </td>
-                <td class="10per">
-                    <a href="/saas/item/edit?edititem={{ eachitem.id }}">MOD</a>
-                </td>
+                <form name="params" action="/saas/item/edit/confirm" method="get">
+                    <input type="hidden" name="itemid" value="{{ eachitem.id }}" />
+                    <input type="hidden" checked="checked" name="choice" value="update" />
+                    <td> {{ eachitem.id }} </td>
+                    <td> <input type="text" name="itemname" value="{{ eachitem.itemname }}" /> </td>
+                    <td>
+                        <div class="thumbnail">
+                            <img src="static/img/item/{{ eachitem.itemimg }}" />
+                        </div>
+                        <input type="text" name="itemimg" value="{{ eachitem.itemimg }}" />
+                        <input type="file" name="imgfile" id="fileImg" />
+                    </td>
+                    <td>
+                        <select name="itemtype" id="select_type_{{ eachitem.id }}">
+    {% for eachtype in typelist %}
+                            <option value="{{ eachtype.id }}"> {{ eachtype.typename }} </option>
+    {% endfor %}
+                        </select>
+                    </td>
+                    <td>
+                        <select name="itemstatus" id="select_status_{{ eachitem.id }}">
+    {% for eachstatus in statuslist %}
+                            <option value="{{ eachstatus.id }}"> {{ eachstatus.status }} </option>
+    {% endfor %}
+                        </select>
+                    </td>
+                    <td><input type="text" name="itemdesc" value = "{{ eachitem.itemdesc }}" /></td>
+                    <td><input type="submit" value="Update" /></td>
+                </form>
             <tr>
 {% endfor %}
         </table>

@@ -12,76 +12,79 @@
             <div>
                 <span class="Gold"> Place Edit Page </span>
             </div>
-{% if empty %}
-            <form name="params" action="/saas/place/edit/confirm" method="get">
-                <p>Place Name: <input type="text" name="placename" />
-                </p>
-                <p>Place Image: <input type="text" name="placeimg" />
-                </p>
-                <input type="file" name="imgfile" id="fileImg" />
-                <p>Image Rect: <input type="text" name="imgrect" />
-                </p>
-                <p>Place Desc: <input type="text" name="placedesc" />
-                </p>
-                <input type="hidden" name="choice" value="create" />
-                <input type="submit" value="Submit" />
-            </form>
-{% else %}
-    {% if editplace %}
-            <form name="params" action="/saas/place/edit/confirm" method="get">
-                <p>Place Name: <input type="text" name="placename"
-                    value = {{ editplace.placename }} />
-                </p>
-                <p>Place Image: <input type="text" name="placeimg"
-                    value = {{ editplace.placeimg }} />
-                </p>
-                <input type="file" name="imgfile" id="fileImg" />
-                <p>Image Rect: <input type="text" name="imgrect"
-                    value = {{ editplace.imgrect }} />
-                </p>
-                <p>Place Desc: <input type="text" name="placedesc"
-                    value = {{ editplace.placedesc }} />
-                </p>
-                <input type="radio" checked="checked" name="choice" value="update" />
-                update <br/>
-                <input type="radio" name="choice" value="create" />
-                create <br/>
-                <input type = "hidden" name = "placeid"
-                    value = "{{ editplace.id }}"/>
-                <input type="submit" value="Submit" />
-            </form>
-    {% endif %}
-{% endif %}
-
+        <hr/>
+        <h3>Add New Place</h3>
+            <table>
+                <tr>
+                    <th>name</th>
+                    <th>img</th>
+                    <th>imgrect</th>
+                    <th>desc</th>
+                    <th>operate</th>
+                </tr>
+                <form name="params" action="/saas/place/edit/confirm" method="get">
+                <tr>
+                    <input type="hidden" name="choice" value="create" />
+                    <td><input type="text" name="placename" /></td>
+                    <td><input type="text" name="placeimg" />
+                        <input type="file" name="imgfile" id="fileImg" /></td>
+                    <td><input type="text" name="imgrect" /></td>
+                    <td><input type="text" name="placedesc" /></td>
+                    <td><input type="submit" value="Add New" /></td>
+                </tr>
+                </form>
+            </table>
+        <hr/>
+        <h3>Current Places</h3>
 
 {% if placelist %}
         <table>
             <tr>
-                <th class="5per">id</th>
-                <th class="15per">name</th>
-                <th class="thumb">img</th>
-                <th class="25per">desc</th>
-                <th class="10per">modify</th>
+                <th>id</th>
+                <th>name</th>
+                <th>img</th>
+                <th>imgrect</th>
+                <th>desc</th>
+                <th>update</th>
+                <th>delete</th>
             </tr>
 {% for eachplace in placelist %}
             <tr>
-                <td class="5per">
-                    {{ eachplace.id }}
-                </td>
-                <td class="15per">
-                    {{ eachplace.placename }}
-                </td>
-                <td class="thumb">
-                    <div class="thumbnail">
-                        <img src="static/img/place/{{ eachplace.placeimg }}" />
-                    </div>
-                </td>
-                <td class="25per">
-                    {{ eachplace.placedesc }}
-                </td>
-                <td class="10per">
-                    <a href="/saas/place/edit?editplace={{ eachplace.id }}">MOD</a>
-                </td>
+                <form name="params" action="/saas/place/edit/confirm" method="get">
+                    <input type="hidden" name="placeid" value="{{ eachplace.id }}" />
+                    <input type="hidden" name="choice" value="update"/>
+                    <td> {{ eachplace.id }} </td>
+                    <td>
+                        <input type="text" name="placename"
+                            value="{{ eachplace.placename }}" />
+                    </td>
+                    <td>
+                        <div class="thumbnail">
+                            <img src="static/img/place/{{ eachplace.placeimg }}" />
+                        </div>
+                        <input type="text" name="placeimg"
+                            value="{{ eachplace.placeimg }}" />
+                        <input type="file" name="imgfile" id="fileImg" />
+                    </td>
+                    <td>
+                        <input type="text" name="imgrect"
+                            value="{{ eachplace.imgrect }}" />
+                    </td>
+                    <td>
+                        <input type="text" name="placedesc"
+                            value="{{ eachplace.placedesc }}" />
+                    </td>
+                    <td>
+                        <input type="submit" value="Update" />
+                    </td>
+                </form>
+                <form name="params" action="/saas/place/edit/confirm" method="get">
+                    <input type="hidden" name="placeid" value="{{ eachplace.id }}" />
+                    <input type="hidden" name="choice" value="delete"/>
+                    <td>
+                        <input type="submit" value="Delete" />
+                    </td>
+                </form>
             <tr>
 {% endfor %}
         </table>

@@ -29,7 +29,7 @@ def calculateTax(request):
     socials = convertEquation(socials)
     salary = convertEquation(salary)
     if taxtype == '0':
-        return "wait for input"
+        return dict()
     initDataRecord()
     needtaxpart = float(salary) - float(socials) - float(starttax)
     taxdata = getSuitableStandard(needtaxpart, taxtype=='self')

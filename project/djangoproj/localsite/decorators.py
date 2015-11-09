@@ -30,6 +30,10 @@ def std_render_html(func):
                     return HttpResponse(html)
                 else:
                     print "illegal paramdict"
+            else:
+                print "lack dict key"
+        else:
+            print "return type error"
         return rstdict
     return decorator
 

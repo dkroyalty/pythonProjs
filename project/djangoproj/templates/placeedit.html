@@ -25,7 +25,7 @@
                 <form name="params" action="/saas/place/edit/confirm" method="get">
                 <tr>
                     <input type="hidden" name="choice" value="create" />
-                    <td><input type="text" name="placename" /></td>
+                    <td><input type="text" name="placename" required="required" /></td>
                     <td><input type="text" name="placeimg" />
                         <input type="file" name="imgfile" id="fileImg" /></td>
                     <td><input type="text" name="imgrect" /></td>
@@ -48,7 +48,7 @@
                 <th>update</th>
                 <th>delete</th>
             </tr>
-{% for eachplace in placelist %}
+    {% for eachplace in placelist %}
             <tr>
                 <form name="params" action="/saas/place/edit/confirm" method="get">
                     <input type="hidden" name="placeid" value="{{ eachplace.id }}" />
@@ -86,7 +86,7 @@
                     </td>
                 </form>
             <tr>
-{% endfor %}
+    {% endfor %}
         </table>
 {% endif %}
         </div>
